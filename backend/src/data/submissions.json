@@ -1,0 +1,46 @@
+[
+  {
+    "id": "sub-far-42",
+    "studentId": "student-far",
+    "day": 42,
+    "githubRepoUrl": "https://github.com/alexmercer/abtalks-challenge",
+    "githubCommitUrl": "https://github.com/alexmercer/abtalks-challenge/commit/7a8b9c0",
+    "linkedinPostUrl": "https://linkedin.com/posts/alexmercer-day42-challenge-7891011",
+    "submittedAt": "2026-08-07T18:45:00.000Z",
+    "xpEarned": 260,
+    "wasEarlySubmission": true
+  },
+  {
+    "id": "sub-far-41",
+    "studentId": "student-far",
+    "day": 41,
+    "githubRepoUrl": "https://github.com/alexmercer/abtalks-challenge",
+    "githubCommitUrl": "https://github.com/alexmercer/abtalks-challenge/commit/6f7e8d9",
+    "linkedinPostUrl": "https://linkedin.com/posts/alexmercer-day41-challenge-6789012",
+    "submittedAt": "2026-08-06T19:20:00.000Z",
+    "xpEarned": 245,
+    "wasEarlySubmission": true
+  },
+  {
+    "id": "sub-missed-16",
+    "studentId": "student-missed",
+    "day": 16,
+    "githubRepoUrl": "https://github.com/taylorvance/60-days-of-code",
+    "githubCommitUrl": "https://github.com/taylorvance/60-days-of-code/commit/1a2b3c4",
+    "linkedinPostUrl": "https://linkedin.com/posts/taylorvance-day16-ai-1234567",
+    "submittedAt": "2026-08-06T19:50:00.000Z",
+    "xpEarned": 220,
+    "wasEarlySubmission": true
+  },
+  {
+    "id": "sub-sarah-58",
+    "studentId": "student-sarah",
+    "day": 58,
+    "githubRepoUrl": "https://github.com/sarahchen/system-challenge",
+    "githubCommitUrl": "https://github.com/sarahchen/system-challenge/commit/9e8d7c6",
+    "linkedinPostUrl": "https://linkedin.com/posts/sarahchen-day58-systems-9998887",
+    "submittedAt": "2026-08-08T15:30:00.000Z",
+    "xpEarned": 300,
+    "wasEarlySubmission": true
+  }
+]

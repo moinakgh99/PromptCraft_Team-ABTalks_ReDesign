@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStore } from "@/store";
+import DemoSandboxBar from "@/components/DemoSandboxBar";
 
 const ALL_LINKS = [
   { to: "/", label: "Home", roles: null },
@@ -26,10 +27,12 @@ export default function Nav() {
   };
 
   return (
-    <nav
-      style={{ borderBottom: "1px solid rgba(99,102,241,0.15)" }}
-      className="sticky top-0 z-50 backdrop-blur-md"
-    >
+    <>
+      <DemoSandboxBar />
+      <nav
+        style={{ borderBottom: "1px solid rgba(99,102,241,0.15)" }}
+        className="sticky top-0 z-50 backdrop-blur-md"
+      >
       <div
         className="max-w-7xl mx-auto px-4 flex items-center justify-between"
         style={{ height: 56 }}
@@ -132,5 +135,6 @@ export default function Nav() {
         </div>
       )}
     </nav>
+  </>
   );
 }

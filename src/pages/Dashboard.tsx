@@ -5,6 +5,7 @@ import {
   CHALLENGE_DAYS, MOTIVATION_DATA, RANDOM_LOOT,
   getLevelProgress, type DayStatus,
 } from "@/data/mock";
+import AICoachTerminal from "@/components/AICoachTerminal";
 
 const STATUS_COLORS: Record<DayStatus, string> = {
   completed: "#22c55e",
@@ -163,6 +164,11 @@ export default function Dashboard() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* AI Coach Live Terminal */}
+        <div className="mb-6">
+          <AICoachTerminal />
         </div>
 
         {/* Main grid */}

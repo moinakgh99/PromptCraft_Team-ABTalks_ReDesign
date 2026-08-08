@@ -1,6 +1,15 @@
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type Track = "Web Dev" | "DSA" | "AI/ML" | "Mobile" | "DevOps";
+export type Track =
+  | "Fullstack Web"
+  | "AI & Machine Learning"
+  | "Systems & Cloud"
+  | "Mobile & Cross-Platform"
+  | "Web Dev"
+  | "DSA"
+  | "AI/ML"
+  | "Mobile"
+  | "DevOps";
 export type Level = "Explorer" | "Builder" | "Creator" | "Architect" | "Legend";
 export type DayStatus = "completed" | "missed" | "pending" | "today";
 export type StudentStatus = "on-track" | "at-risk" | "inactive";
@@ -9,15 +18,22 @@ export interface Student {
   id: string;
   name: string;
   avatar: string;
+  avatarUrl?: string;
   college: string;
   track: Track;
   streak: number;
+  currentStreak?: number;
+  longestStreak?: number;
   xp: number;
   level: Level;
+  levelNumber?: number;
   completedDays: number;
+  totalDaysCompleted?: number;
   recruiterVisibility: number;
+  recruiterVisibilityScore?: number;
   consistencyScore: number;
   lastActive: string;
+  lastSubmissionDate?: string | null;
   status: StudentStatus;
   bio: string;
   github: string;
@@ -26,14 +42,22 @@ export interface Student {
   badges: string[];
   joinedDate: string;
   submissions: Submission[];
+  streakFreezeTokens?: number;
+  unlockedThemes?: string[];
+  activeTheme?: string;
+  unlockedAchievements?: Array<{ achievementId: string; unlockedAt: string }>;
 }
 
 export interface Submission {
   day: number;
   githubLink: string;
   linkedinLink: string;
+  githubRepoUrl?: string;
+  githubCommitUrl?: string;
+  linkedinPostUrl?: string;
   submittedAt: string;
   xpEarned: number;
+  wasEarlySubmission?: boolean;
 }
 
 export interface ChallengeDay {
@@ -117,84 +141,64 @@ const generateSubmissions = (count: number): Submission[] =>
 
 export const STUDENTS: Student[] = [
   {
-    id: "s1", name: "Arjun Sharma", avatar: "https://i.pravatar.cc/150?img=11",
-    college: "IIT Delhi", track: "Web Dev", streak: 12, xp: 2840, level: "Builder",
-    completedDays: 12, recruiterVisibility: 78, consistencyScore: 91,
-    lastActive: "2 hours ago", status: "on-track",
-    bio: "Final year CSE student passionate about building scalable web applications.",
-    github: "github.com/arjunsharma", linkedin: "linkedin.com/in/arjunsharma",
-    dayStatuses: generateDayStatuses(12, 0), badges: ["🔥 Streak Master", "⚡ Night Owl", "🎯 Perfect Week"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(12),
+    id: "student-far", name: "Alex Mercer", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Alex",
+    college: "IIT Delhi", track: "Fullstack Web", streak: 14, currentStreak: 14, xp: 5420, level: "Architect",
+    completedDays: 42, totalDaysCompleted: 42, recruiterVisibility: 92, recruiterVisibilityScore: 92, consistencyScore: 94,
+    lastActive: "Yesterday", status: "on-track",
+    bio: "Fullstack engineer passionate about high-performance web applications, distributed microservices, and slick UI design.",
+    github: "https://github.com/alexmercer", linkedin: "https://linkedin.com/in/alexmercer",
+    dayStatuses: generateDayStatuses(42, 0), badges: ["🔥 Streak Master", "🏗️ Architect", "🎯 40+ Days"],
+    joinedDate: "2026-06-25", submissions: generateSubmissions(42), streakFreezeTokens: 2,
   },
   {
-    id: "s2", name: "Priya Patel", avatar: "https://i.pravatar.cc/150?img=5",
-    college: "BITS Pilani", track: "AI/ML", streak: 8, xp: 1920, level: "Builder",
-    completedDays: 10, recruiterVisibility: 54, consistencyScore: 82,
-    lastActive: "1 day ago", status: "on-track",
-    bio: "ML enthusiast exploring computer vision and NLP applications.",
-    github: "github.com/priyapatel", linkedin: "linkedin.com/in/priyapatel",
-    dayStatuses: generateDayStatuses(10, 2), badges: ["🧠 AI Pioneer", "📊 Data Wizard"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(10),
+    id: "student-maya", name: "Maya Patel", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Maya",
+    college: "BITS Pilani", track: "AI & Machine Learning", streak: 20, currentStreak: 20, xp: 2800, level: "Creator",
+    completedDays: 24, totalDaysCompleted: 24, recruiterVisibility: 75, recruiterVisibilityScore: 75, consistencyScore: 88,
+    lastActive: "Yesterday", status: "on-track",
+    bio: "Data Scientist exploring LLMs, RAG pipelines, and PyTorch models.",
+    github: "https://github.com/mayapatel", linkedin: "https://linkedin.com/in/mayapatel",
+    dayStatuses: generateDayStatuses(24, 0), badges: ["🧠 AI Pioneer", "📊 Data Wizard"],
+    joinedDate: "2026-07-10", submissions: generateSubmissions(24), streakFreezeTokens: 2,
   },
   {
-    id: "s3", name: "Rahul Verma", avatar: "https://i.pravatar.cc/150?img=8",
-    college: "NIT Trichy", track: "DSA", streak: 0, xp: 950, level: "Explorer",
-    completedDays: 8, recruiterVisibility: 23, consistencyScore: 55,
-    lastActive: "3 days ago", status: "at-risk",
-    bio: "Competitive programmer grinding for product company placements.",
-    github: "github.com/rahulverma", linkedin: "linkedin.com/in/rahulverma",
-    dayStatuses: generateDayStatuses(8, 3), badges: ["⚔️ Code Warrior"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(8),
+    id: "student-missed", name: "Taylor Vance", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Taylor",
+    college: "NIT Trichy", track: "AI & Machine Learning", streak: 8, currentStreak: 8, xp: 1850, level: "Creator",
+    completedDays: 16, totalDaysCompleted: 16, recruiterVisibility: 58, recruiterVisibilityScore: 58, consistencyScore: 65,
+    lastActive: "2 days ago", status: "at-risk",
+    bio: "AI & Systems enthusiast grinding through 60 days of code.",
+    github: "https://github.com/taylorvance", linkedin: "https://linkedin.com/in/taylorvance",
+    dayStatuses: generateDayStatuses(16, 2), badges: ["⚔️ Code Warrior", "🧊 Freeze Saved"],
+    joinedDate: "2026-07-20", submissions: generateSubmissions(16), streakFreezeTokens: 1,
   },
   {
-    id: "s4", name: "Sneha Reddy", avatar: "https://i.pravatar.cc/150?img=16",
-    college: "VIT Vellore", track: "Mobile", streak: 15, xp: 3600, level: "Creator",
-    completedDays: 15, recruiterVisibility: 89, consistencyScore: 96,
-    lastActive: "30 minutes ago", status: "on-track",
-    bio: "Flutter developer building apps that solve real India-first problems.",
-    github: "github.com/snehareddy", linkedin: "linkedin.com/in/snehareddy",
-    dayStatuses: generateDayStatuses(15, 0), badges: ["📱 App Maestro", "🔥 Streak Master", "🌟 Top 10%"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(15),
+    id: "student-dev", name: "Devon Miller", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Devon",
+    college: "VIT Vellore", track: "Mobile & Cross-Platform", streak: 28, currentStreak: 28, xp: 3950, level: "Architect",
+    completedDays: 32, totalDaysCompleted: 32, recruiterVisibility: 84, recruiterVisibilityScore: 84, consistencyScore: 96,
+    lastActive: "Yesterday", status: "on-track",
+    bio: "Mobile developer bringing cross-platform magic with React Native and Flutter.",
+    github: "https://github.com/devonmiller", linkedin: "https://linkedin.com/in/devonmiller",
+    dayStatuses: generateDayStatuses(32, 0), badges: ["📱 App Maestro", "🔥 Streak Master", "🌟 Top 10%"],
+    joinedDate: "2026-07-01", submissions: generateSubmissions(32), streakFreezeTokens: 1,
   },
   {
-    id: "s5", name: "Karthik Nair", avatar: "https://i.pravatar.cc/150?img=20",
-    college: "IIIT Hyderabad", track: "DevOps", streak: 5, xp: 1340, level: "Explorer",
-    completedDays: 9, recruiterVisibility: 42, consistencyScore: 68,
-    lastActive: "5 hours ago", status: "at-risk",
-    bio: "DevOps enthusiast automating everything from CI/CD to infra.",
-    github: "github.com/karthiknair", linkedin: "linkedin.com/in/karthiknair",
-    dayStatuses: generateDayStatuses(9, 2), badges: ["⚙️ Automation Pro"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(9),
+    id: "student-sarah", name: "Sarah Chen", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Sarah",
+    college: "IIIT Hyderabad", track: "Systems & Cloud", streak: 58, currentStreak: 58, xp: 8200, level: "Legend",
+    completedDays: 58, totalDaysCompleted: 58, recruiterVisibility: 98, recruiterVisibilityScore: 98, consistencyScore: 99,
+    lastActive: "Today", status: "on-track",
+    bio: "Cloud architect crafting resilient distributed systems.",
+    github: "https://github.com/sarahchen", linkedin: "https://linkedin.com/in/sarahchen",
+    dayStatuses: generateDayStatuses(58, 0), badges: ["🏆 Legend Tier", "☁️ Cloud Titan", "🔥 50+ Streak"],
+    joinedDate: "2026-06-10", submissions: generateSubmissions(58), streakFreezeTokens: 3,
   },
   {
-    id: "s6", name: "Divya Menon", avatar: "https://i.pravatar.cc/150?img=25",
-    college: "Manipal University", track: "Web Dev", streak: 45, xp: 9800, level: "Architect",
-    completedDays: 45, recruiterVisibility: 34, consistencyScore: 98,
-    lastActive: "1 hour ago", status: "on-track",
-    bio: "Building in public every day. 45-day streak and counting.",
-    github: "github.com/divyamenon", linkedin: "linkedin.com/in/divyamenon",
-    dayStatuses: generateDayStatuses(45, 0), badges: ["💎 Hidden Gem", "🏗️ Architecture Pro", "🔥 Streak Master"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(45),
-  },
-  {
-    id: "s7", name: "Amit Kumar", avatar: "https://i.pravatar.cc/150?img=33",
-    college: "DTU Delhi", track: "Web Dev", streak: 3, xp: 720, level: "Explorer",
-    completedDays: 6, recruiterVisibility: 18, consistencyScore: 45,
-    lastActive: "2 days ago", status: "inactive",
-    bio: "Just started my coding journey.",
-    github: "github.com/amitkumar", linkedin: "linkedin.com/in/amitkumar",
-    dayStatuses: generateDayStatuses(6, 4), badges: ["🌱 Newcomer"],
-    joinedDate: "2024-01-08", submissions: generateSubmissions(6),
-  },
-  {
-    id: "s8", name: "Pooja Singh", avatar: "https://i.pravatar.cc/150?img=44",
-    college: "SRM Chennai", track: "AI/ML", streak: 20, xp: 4500, level: "Creator",
-    completedDays: 20, recruiterVisibility: 67, consistencyScore: 88,
-    lastActive: "3 hours ago", status: "on-track",
-    bio: "NLP researcher building vernacular language models for Bharat.",
-    github: "github.com/poojasingh", linkedin: "linkedin.com/in/poojasingh",
-    dayStatuses: generateDayStatuses(20, 0), badges: ["🤖 AI Specialist", "📝 Consistent Builder"],
-    joinedDate: "2024-01-01", submissions: generateSubmissions(20),
+    id: "student-fresh", name: "Jordan Lee", avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=Jordan",
+    college: "Manipal University", track: "Fullstack Web", streak: 0, currentStreak: 0, xp: 0, level: "Explorer",
+    completedDays: 0, totalDaysCompleted: 0, recruiterVisibility: 0, recruiterVisibilityScore: 0, consistencyScore: 0,
+    lastActive: "Never", status: "inactive",
+    bio: "Brand new developer starting the 60-day challenge journey.",
+    github: "https://github.com/jordanlee", linkedin: "https://linkedin.com/in/jordanlee",
+    dayStatuses: generateDayStatuses(0, 0), badges: ["🌱 Day 1 Ready"],
+    joinedDate: "2026-08-08", submissions: [], streakFreezeTokens: 1,
   },
 ];
 

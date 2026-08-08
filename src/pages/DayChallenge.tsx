@@ -16,11 +16,13 @@ export default function DayChallenge() {
   const dayNum = parseInt(day || "12", 10);
   const challenge = CHALLENGE_DAYS[dayNum - 1] || CHALLENGE_DAYS[11];
 
-  const { submittedDays, submitDay, currentStudent } = useStore();
+  const { submittedDays, submitChallengeDay, currentStudent } = useStore();
   const isSubmitted = submittedDays.has(dayNum);
 
   const [github, setGithub] = useState("");
   const [linkedin, setLinkedin] = useState("");
+  const [reflection, setReflection] = useState("");
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(isSubmitted);
   const [step, setStep] = useState(0);
@@ -28,7 +30,19 @@ export default function DayChallenge() {
   const [aiMsg, setAiMsg] = useState("");
   const [xpEarned] = useState(challenge.xpReward + 50 + 30 + 20);
 
-  const alreadyDone = currentStudent.dayStatuses[dayNum - 1] === "completed";
+  const alreadyDone = currentStudent.dayStatuses ? currentStudent.dayStatuses[dayNum - 1] === "completed" : false;
+
+  const quizQuestion = {
+    question: `Day ${dayNum} Concept Check: What is the primary architecture goal of ${challenge.title}?`,
+    options: [
+      "Modular design with separation of concerns & clean state management",
+      "Writing all code in a single 2000-line monolithic file",
+      "Bypassing input validation to reduce lines of code",
+      "Hardcoding state variables directly inside render loops",
+    ],
+    correctIdx: 0,
+    explanation: "Modular separation of concerns ensures your codebase remains scalable, testable, and maintainable.",
+  };
 
   useEffect(() => {
     if (submitted) {
@@ -42,12 +56,18 @@ export default function DayChallenge() {
     }
   }, [submitted]);
 
+  const handleQuickFillDemo = () => {
+    setGithub(`https://github.com/alexmercer/abtalks-day-${dayNum}`);
+    setLinkedin(`https://linkedin.com/posts/alexmercer_day${dayNum}-challenge-completed`);
+    setSelectedOption(0);
+    setReflection("Implemented modular component state, optimized re-renders, and verified REST API endpoints.");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!github || !linkedin) return;
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    submitDay(dayNum);
+    await submitChallengeDay(dayNum, github, linkedin);
     setLoot(RANDOM_LOOT());
     setSubmitted(true);
     setSubmitting(false);
@@ -63,34 +83,34 @@ export default function DayChallenge() {
         <div className="flex items-center gap-2 mb-6" style={{ fontFamily: "Inter, sans-serif", fontSize: "0.85rem", color: "var(--muted)" }}>
           <Link to="/dashboard" style={{ color: "var(--primary)", textDecoration: "none" }}>Dashboard</Link>
           <span>›</span>
-          <span style={{ color: "var(--text-dim, #94a3b8)" }}>Day {dayNum}</span>
+          <span style={{ color: "var(--text-dim, #94a3b8)" }}>Day {dayNum} Challenge</span>
         </div>
 
-        {/* Challenge card */}
+        {/* Challenge Header Card */}
         <div
           className="rounded-2xl p-6 mb-5"
-          style={{ background: "var(--card)", border: "1px solid rgba(99,102,241,0.2)" }}
+          style={{ background: "var(--card)", border: "1px solid rgba(139,99,155,0.25)" }}
         >
           <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
             <div className="flex items-center gap-2">
               <span
                 className="text-xs font-semibold px-3 py-1 rounded-full"
-                style={{ background: "rgba(99,102,241,0.15)", color: "var(--primary-light)" }}
+                style={{ background: "var(--primary-muted)", color: "var(--primary-light)" }}
               >
                 Day {dayNum} / 60
               </span>
               <span
                 className="text-xs px-2 py-0.5 rounded-full"
                 style={{
-                  background: challenge.difficulty === "Hard" ? "rgba(239,68,68,0.1)" : challenge.difficulty === "Medium" ? "rgba(245,158,11,0.1)" : "rgba(34,197,94,0.1)",
-                  color: challenge.difficulty === "Hard" ? "#ef4444" : challenge.difficulty === "Medium" ? "#f59e0b" : "#22c55e",
-                  border: `1px solid ${challenge.difficulty === "Hard" ? "rgba(239,68,68,0.3)" : challenge.difficulty === "Medium" ? "rgba(245,158,11,0.3)" : "rgba(34,197,94,0.3)"}`,
+                  background: challenge.difficulty === "Hard" ? "rgba(239,68,68,0.15)" : challenge.difficulty === "Medium" ? "rgba(245,158,11,0.15)" : "rgba(52,211,153,0.15)",
+                  color: challenge.difficulty === "Hard" ? "#f87171" : challenge.difficulty === "Medium" ? "#fbbf24" : "#34d399",
+                  border: `1px solid ${challenge.difficulty === "Hard" ? "rgba(239,68,68,0.3)" : challenge.difficulty === "Medium" ? "rgba(245,158,11,0.3)" : "rgba(52,211,153,0.3)"}`,
                 }}
               >
                 {challenge.difficulty}
               </span>
             </div>
-            <span style={{ color: "#f59e0b", fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, fontSize: "0.9rem" }}>
+            <span style={{ color: "var(--primary-light)", fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, fontSize: "1rem" }}>
               ⚡ {challenge.xpReward} XP
             </span>
           </div>
@@ -99,13 +119,13 @@ export default function DayChallenge() {
             {challenge.title}
           </h1>
 
-          <p style={{ color: "var(--text-dim, #94a3b8)", lineHeight: 1.7, fontFamily: "Inter, sans-serif", fontSize: "0.95rem" }}>
+          <p style={{ color: "var(--muted)", lineHeight: 1.7, fontFamily: "Inter, sans-serif", fontSize: "0.95rem" }}>
             {challenge.description}
           </p>
 
           <div className="flex gap-2 mt-4 flex-wrap">
             {challenge.tags.map((t) => (
-              <span key={t} className="text-xs px-2 py-1 rounded-md" style={{ background: "rgba(99,102,241,0.1)", color: "var(--primary-light)" }}>
+              <span key={t} className="text-xs px-2.5 py-1 rounded-md" style={{ background: "var(--primary-muted)", color: "var(--primary-light)" }}>
                 #{t}
               </span>
             ))}
@@ -113,36 +133,33 @@ export default function DayChallenge() {
 
           {challenge.resources.length > 0 && (
             <div className="mt-5 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-              <div className="text-xs mb-2" style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                Resources
+              <div className="text-xs mb-2 font-semibold" style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                Build Checklist & Resources
               </div>
               {challenge.resources.map((r) => (
-                <a
+                <div
                   key={r}
-                  href={`https://${r}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block text-sm"
-                  style={{ color: "var(--primary)", fontFamily: "Inter, sans-serif", marginBottom: 4 }}
+                  className="flex items-center gap-2 text-sm py-1"
+                  style={{ color: "var(--primary-light)", fontFamily: "Inter, sans-serif" }}
                 >
-                  → {r}
-                </a>
+                  <span>✓</span> <span>{r}</span>
+                </div>
               ))}
             </div>
           )}
         </div>
 
-        {/* Steps reveal */}
+        {/* Challenge Steps */}
         <div className="rounded-2xl p-6 mb-5" style={{ background: "var(--card)", border: "1px solid var(--card-border)" }}>
           <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "1.1rem", fontWeight: 600, color: "var(--text)", marginBottom: 16 }}>
-            How to Complete This Challenge
+            Workflow Steps
           </h2>
           <div className="flex flex-col gap-4">
             {[
-              { n: 1, title: "Understand the Brief", desc: "Read the challenge carefully. Google any concepts you don't know before writing a single line." },
-              { n: 2, title: "Build and Commit", desc: "Build your solution and push it to GitHub. Make sure your commit message is descriptive." },
-              { n: 3, title: "Post on LinkedIn", desc: "Share what you built, what you learned, and what was hard. Tag #ABTalks60Days." },
-              { n: 4, title: "Submit Proof", desc: "Paste both links below. Your streak and XP are updated immediately." },
+              { n: 1, title: "1. Read Brief & Setup", desc: "Review project checklist and outline your data structures." },
+              { n: 2, title: "2. Build & Test Code", desc: "Write clean code, run unit tests, and verify edge cases locally." },
+              { n: 3, title: "3. Commit & Share Proof", desc: "Push to GitHub repo and publish a LinkedIn build reflection." },
+              { n: 4, title: "4. Answer Questions & Submit", desc: "Complete the concept quiz below and submit proof links." },
             ].map((s, i) => (
               <div
                 key={s.n}
@@ -153,8 +170,8 @@ export default function DayChallenge() {
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold transition-all"
                   style={{
-                    background: step >= i ? "rgba(99,102,241,0.25)" : "#1e293b",
-                    border: `2px solid ${step >= i ? "var(--primary)" : "var(--subtle)"}`,
+                    background: step >= i ? "var(--primary-muted)" : "var(--subtle)",
+                    border: `2px solid ${step >= i ? "var(--primary)" : "var(--card-border)"}`,
                     color: step >= i ? "var(--primary-light)" : "var(--muted)",
                     fontFamily: "Space Grotesk, sans-serif",
                   }}
@@ -170,33 +187,26 @@ export default function DayChallenge() {
           </div>
         </div>
 
-        {/* Progress fill bar */}
+        {/* Progress bar */}
         <div className="rounded-2xl p-5 mb-5" style={{ background: "var(--card)", border: "1px solid var(--card-border)" }}>
           <div className="flex justify-between mb-2">
-            <span style={{ color: "var(--muted)", fontSize: "0.82rem", fontFamily: "Inter, sans-serif" }}>Overall Progress</span>
-            <span style={{ color: "var(--text-dim, #94a3b8)", fontFamily: "Space Grotesk, sans-serif", fontSize: "0.85rem" }}>{completedPct}%</span>
+            <span style={{ color: "var(--muted)", fontSize: "0.82rem", fontFamily: "Inter, sans-serif" }}>60-Day Progress</span>
+            <span style={{ color: "var(--primary-light)", fontFamily: "Space Grotesk, sans-serif", fontSize: "0.85rem" }}>{completedPct}%</span>
           </div>
           <div className="rounded-full overflow-hidden" style={{ height: 6, background: "var(--subtle)" }}>
             <div
               className="h-full rounded-full"
-              style={{ width: `${completedPct}%`, background: "linear-gradient(90deg, #6366f1, #06b6d4)", transition: "width 1.4s ease" }}
+              style={{ width: `${completedPct}%`, background: "linear-gradient(90deg, #F8B2B2, #AF719D, #8B639B)", transition: "width 1.4s ease" }}
             />
-          </div>
-          <div className="flex justify-between mt-1">
-            {[0, 25, 50, 75, 100].map((m) => (
-              <span key={m} style={{ color: completedPct >= m ? "var(--primary)" : "var(--subtle)", fontSize: "0.7rem", fontFamily: "Inter, sans-serif" }}>
-                {m}%
-              </span>
-            ))}
           </div>
         </div>
 
         {/* Submission form or success */}
         {(submitted || alreadyDone) ? (
-          <div className="rounded-2xl p-8 text-center animate-fade-in" style={{ background: "linear-gradient(135deg, rgba(34,197,94,0.08), rgba(99,102,241,0.08))", border: "1px solid rgba(34,197,94,0.3)" }}>
+          <div className="rounded-2xl p-8 text-center animate-fade-in" style={{ background: "linear-gradient(135deg, rgba(52,211,153,0.12), rgba(139,99,155,0.12))", border: "1px solid rgba(52,211,153,0.4)" }}>
             <div style={{ fontSize: "3rem", marginBottom: 12 }}>🎉</div>
-            <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "1.4rem", fontWeight: 700, color: "#22c55e", marginBottom: 8 }}>
-              Day {dayNum} Completed!
+            <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "1.5rem", fontWeight: 700, color: "#34d399", marginBottom: 8 }}>
+              Day {dayNum} Challenge Verified!
             </h2>
             <p style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif", marginBottom: 16 }}>
               +{xpEarned} XP earned · Streak maintained 🔥
@@ -204,37 +214,37 @@ export default function DayChallenge() {
 
             {/* XP Breakdown */}
             <div className="rounded-xl p-4 mb-5 text-left" style={{ background: "rgba(0,0,0,0.3)" }}>
-              <div className="text-xs mb-2" style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif", textTransform: "uppercase" }}>XP Breakdown</div>
+              <div className="text-xs mb-2 font-bold uppercase tracking-wider" style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif" }}>XP Reward Breakdown</div>
               {[
-                { label: "Base XP", val: challenge.xpReward },
-                { label: "Consistency Bonus", val: 50 },
-                { label: "Night Owl Bonus", val: 30 },
-                { label: "Perfect Submission", val: 20 },
+                { label: "Base Challenge XP", val: challenge.xpReward },
+                { label: "Concept Quiz Bonus", val: 50 },
+                { label: "Reflection Submission Bonus", val: 30 },
+                { label: "Verified Links Bonus", val: 20 },
               ].map((row) => (
-                <div key={row.label} className="flex justify-between py-1">
-                  <span style={{ color: "var(--text-dim, #94a3b8)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif" }}>{row.label}</span>
-                  <span style={{ color: "#22c55e", fontFamily: "Space Grotesk, sans-serif", fontWeight: 600 }}>+{row.val}</span>
+                <div key={row.label} className="flex justify-between py-1 border-b border-white/5 last:border-none">
+                  <span style={{ color: "var(--text)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif" }}>{row.label}</span>
+                  <span style={{ color: "#34d399", fontFamily: "Space Grotesk, sans-serif", fontWeight: 600 }}>+{row.val} XP</span>
                 </div>
               ))}
             </div>
 
             {/* AI Momentum Coach */}
-            <div className="rounded-xl p-4 mb-5 text-left" style={{ background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.2)" }}>
-              <div className="text-xs mb-2" style={{ color: "var(--primary-light)", fontFamily: "Inter, sans-serif", textTransform: "uppercase" }}>🤖 AI Momentum Coach</div>
-              <p style={{ color: "#c7d2fe", fontFamily: "Inter, sans-serif", fontSize: "0.88rem", minHeight: 20, transition: "all 0.5s" }}>
-                {aiMsg || "Analyzing your momentum…"}
+            <div className="rounded-xl p-4 mb-5 text-left" style={{ background: "var(--primary-muted)", border: "1px solid rgba(139,99,155,0.3)" }}>
+              <div className="text-xs mb-2 font-bold uppercase tracking-wider" style={{ color: "var(--primary-light)", fontFamily: "Inter, sans-serif" }}>🤖 AI Momentum Coach</div>
+              <p style={{ color: "#fcf8fa", fontFamily: "Inter, sans-serif", fontSize: "0.88rem" }}>
+                {aiMsg || "Great job completing today's challenge! Your recruiter visibility score has increased."}
               </p>
             </div>
 
             {/* Loot reveal */}
             {loot && (
-              <div className="rounded-xl p-4 mb-5" style={{ background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.25)" }}>
-                <div className="text-xs mb-2" style={{ color: "#f59e0b", fontFamily: "Inter, sans-serif", textTransform: "uppercase" }}>🎁 Daily Loot Unlocked</div>
-                <div style={{ fontSize: "1.6rem" }}>
+              <div className="rounded-xl p-4 mb-5" style={{ background: "rgba(251,191,36,0.1)", border: "1px solid rgba(251,191,36,0.3)" }}>
+                <div className="text-xs mb-2 font-bold uppercase tracking-wider" style={{ color: "#fbbf24", fontFamily: "Inter, sans-serif" }}>🎁 Daily Loot Box Unlocked</div>
+                <div style={{ fontSize: "1.8rem" }}>
                   {loot.type === "badge" ? "🏅" : loot.type === "quote" ? "💬" : loot.type === "avatar" ? "🎭" : "🎨"}
                 </div>
-                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, color: "var(--text)", marginTop: 4 }}>{loot.value}</div>
-                <span className="text-xs" style={{ color: loot.rarity === "legendary" ? "#f59e0b" : loot.rarity === "rare" ? "var(--primary-light)" : "var(--muted)" }}>
+                <div style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 700, color: "var(--text)", marginTop: 4 }}>{loot.value}</div>
+                <span className="text-xs uppercase font-mono px-2 py-0.5 rounded mt-1 inline-block" style={{ background: "rgba(251,191,36,0.2)", color: "#fbbf24" }}>
                   {loot.rarity}
                 </span>
               </div>
@@ -242,8 +252,8 @@ export default function DayChallenge() {
 
             <Link
               to="/dashboard"
-              className="inline-block rounded-xl font-semibold"
-              style={{ background: "linear-gradient(135deg, #6366f1, #06b6d4)", padding: "12px 28px", color: "white", textDecoration: "none", fontFamily: "Space Grotesk, sans-serif" }}
+              className="inline-block rounded-xl font-semibold transition-all hover:scale-105"
+              style={{ background: "linear-gradient(135deg, #AF719D, #8B639B)", padding: "12px 28px", color: "white", textDecoration: "none", fontFamily: "Space Grotesk, sans-serif" }}
             >
               Back to Dashboard →
             </Link>
@@ -251,20 +261,86 @@ export default function DayChallenge() {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="rounded-2xl p-6"
-            style={{ background: "var(--card)", border: "1px solid rgba(99,102,241,0.2)" }}
+            className="rounded-2xl p-6 space-y-6"
+            style={{ background: "var(--card)", border: "1px solid rgba(139,99,155,0.3)" }}
           >
-            <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "1.15rem", fontWeight: 600, color: "var(--text)", marginBottom: 4 }}>
-              Submit Proof of Work
-            </h2>
-            <p style={{ color: "var(--muted)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif", marginBottom: 20 }}>
-              Both links are required to count towards your streak.
-            </p>
-
-            <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-white/10">
               <div>
-                <label style={{ color: "var(--text-dim, #94a3b8)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif", marginBottom: 6, display: "block" }}>
-                  GitHub Commit URL
+                <h2 style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "1.2rem", fontWeight: 700, color: "var(--text)" }}>
+                  Submit Challenge & Quiz Answers
+                </h2>
+                <p style={{ color: "var(--muted)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif" }}>
+                  Complete the quick concept check and paste your proof links below.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleQuickFillDemo}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-500/30 transition"
+              >
+                ⚡ Auto-fill Demo Answers & Links
+              </button>
+            </div>
+
+            {/* Interactive Concept Quiz */}
+            <div className="p-4 rounded-xl bg-slate-900/60 border border-white/10">
+              <label className="text-xs font-bold uppercase tracking-wider text-indigo-300 mb-2 block">
+                ❓ Concept Check Question
+              </label>
+              <p className="text-sm text-slate-200 font-medium mb-3">{quizQuestion.question}</p>
+
+              <div className="space-y-2">
+                {quizQuestion.options.map((opt, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setSelectedOption(idx)}
+                    className={`w-full text-left p-3 rounded-xl text-xs transition border flex items-center justify-between ${
+                      selectedOption === idx
+                        ? "bg-indigo-600/20 border-indigo-500 text-indigo-200 font-semibold"
+                        : "bg-slate-950/40 border-slate-800 text-slate-300 hover:border-slate-700"
+                    }`}
+                  >
+                    <span>{opt}</span>
+                    {selectedOption === idx && <span className="text-indigo-400 font-bold">✓</span>}
+                  </button>
+                ))}
+              </div>
+
+              {selectedOption !== null && (
+                <div className="mt-3 p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300">
+                  💡 <strong>Explanation:</strong> {quizQuestion.explanation}
+                </div>
+              )}
+            </div>
+
+            {/* Reflection text area */}
+            <div>
+              <label style={{ color: "var(--text-dim, #94a3b8)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif", marginBottom: 6, display: "block", fontWeight: 600 }}>
+                📝 Technical Reflection (What did you build / learn today?)
+              </label>
+              <textarea
+                rows={3}
+                placeholder="Describe your implementation details, challenges faced, or key lessons learned..."
+                value={reflection}
+                onChange={(e) => setReflection(e.target.value)}
+                className="w-full rounded-xl text-sm outline-none transition-all"
+                style={{
+                  background: "var(--input-bg)",
+                  border: `1px solid ${reflection ? "rgba(139,99,155,0.5)" : "rgba(255,255,255,0.08)"}`,
+                  padding: "12px 16px",
+                  color: "var(--text)",
+                  fontFamily: "Inter, sans-serif",
+                }}
+              />
+            </div>
+
+            {/* Proof links */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label style={{ color: "var(--text-dim, #94a3b8)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif", marginBottom: 6, display: "block", fontWeight: 600 }}>
+                  🐙 GitHub Commit URL *
                 </label>
                 <input
                   type="url"
@@ -274,16 +350,17 @@ export default function DayChallenge() {
                   className="w-full rounded-xl text-sm outline-none transition-all"
                   style={{
                     background: "var(--input-bg)",
-                    border: `1px solid ${github ? "rgba(99,102,241,0.5)" : "rgba(255,255,255,0.08)"}`,
+                    border: `1px solid ${github ? "rgba(139,99,155,0.6)" : "rgba(255,255,255,0.08)"}`,
                     padding: "12px 16px",
                     color: "var(--text)",
                     fontFamily: "Inter, sans-serif",
                   }}
                 />
               </div>
+
               <div>
-                <label style={{ color: "var(--text-dim, #94a3b8)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif", marginBottom: 6, display: "block" }}>
-                  LinkedIn Post URL
+                <label style={{ color: "var(--text-dim, #94a3b8)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif", marginBottom: 6, display: "block", fontWeight: 600 }}>
+                  🔗 LinkedIn Post URL *
                 </label>
                 <input
                   type="url"
@@ -293,7 +370,7 @@ export default function DayChallenge() {
                   className="w-full rounded-xl text-sm outline-none transition-all"
                   style={{
                     background: "var(--input-bg)",
-                    border: `1px solid ${linkedin ? "rgba(6,182,212,0.5)" : "rgba(255,255,255,0.08)"}`,
+                    border: `1px solid ${linkedin ? "rgba(175,113,157,0.6)" : "rgba(255,255,255,0.08)"}`,
                     padding: "12px 16px",
                     color: "var(--text)",
                     fontFamily: "Inter, sans-serif",
@@ -305,9 +382,9 @@ export default function DayChallenge() {
             <button
               type="submit"
               disabled={!github || !linkedin || submitting}
-              className="w-full mt-5 rounded-xl font-semibold transition-all"
+              className="w-full rounded-xl font-semibold transition-all shadow-lg hover:scale-[1.01]"
               style={{
-                background: github && linkedin ? "linear-gradient(135deg, #6366f1, #4f46e5)" : "#1e293b",
+                background: github && linkedin ? "linear-gradient(135deg, #AF719D, #8B639B)" : "#1c193c",
                 padding: "14px",
                 color: github && linkedin ? "white" : "var(--muted)",
                 fontFamily: "Space Grotesk, sans-serif",
@@ -316,13 +393,8 @@ export default function DayChallenge() {
                 cursor: github && linkedin ? "pointer" : "not-allowed",
               }}
             >
-              {submitting ? "Submitting…" : "Submit & Earn XP ⚡"}
+              {submitting ? "Submitting Challenge & Answers…" : `Submit & Claim +${xpEarned} XP ⚡`}
             </button>
-
-            {/* Floating CTA hint on mobile */}
-            <p className="text-center mt-3 text-xs" style={{ color: "var(--subtle)", fontFamily: "Inter, sans-serif" }}>
-              Submission earns {challenge.xpReward + 100} XP + streak continuation
-            </p>
           </form>
         )}
 

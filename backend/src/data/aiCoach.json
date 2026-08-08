@@ -1,0 +1,27 @@
+{
+  "percentileTemplates": [
+    "You are currently performing in the top {percentile}% of all builders across the 60-day challenge!",
+    "Your current XP and streak place you in the top {percentile}% percentile of your cohort.",
+    "Phenomenal progress! You are outperforming {percentile}% of active candidates on the platform."
+  ],
+  "probabilityTemplates": [
+    "Based on your {streak}-day streak and completion rate, your estimated probability of finishing all 60 days is {probability}%.",
+    "Statistical trajectory model estimates a {probability}% likelihood of completing the entire challenge.",
+    "Your consistent submission habits yield a strong {probability}% predicted completion rate."
+  ],
+  "nextDayCallouts": [
+    "Tomorrow's challenge focuses on '{nextTitle}' ({nextDifficulty} difficulty). Prepare your focus!",
+    "Up next on Day {nextDay}: '{nextTitle}'. Keep your momentum going strong!",
+    "Day {nextDay} will test your skills with '{nextTitle}'. Be ready to tackle it early."
+  ],
+  "productiveTimeCallouts": [
+    "Analysis shows your most productive submission window is between 7:00 PM and 10:00 PM.",
+    "You submit code most consistently in the evening hours before the 8:00 PM early bonus cutoff.",
+    "Peak focus detected! 85% of your commits are pushed during peak afternoon coding hours."
+  ],
+  "recommendedActions": [
+    "Keep your streak alive by attempting Day {nextDay} before 8:00 PM for the early submission XP bonus!",
+    "Check out the Leaderboard to compare your streak against top candidates in your track.",
+    "Explore your newly unlocked profile themes in profile settings to customize your workspace aesthetics!"
+  ]
+}

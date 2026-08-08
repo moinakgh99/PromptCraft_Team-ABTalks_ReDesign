@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { TRACKS } from "@/data/mock";
+import ProofOfWorkPipeline from "@/components/ProofOfWorkPipeline";
 
 const TRACK_ICONS: Record<string, string> = {
   "Web Dev": "🌐", DSA: "⚔️", "AI/ML": "🤖", Mobile: "📱", DevOps: "⚙️",
@@ -233,15 +234,19 @@ export default function Landing() {
       </section>
 
       {/* ── How it Works ── */}
-      <section className="max-w-5xl mx-auto px-4 py-20">
+      <section className="max-w-5xl mx-auto px-4 py-16">
         <ScrollReveal>
           <h2 className="text-center mb-2" style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 700, color: "var(--text)" }}>
             How It Works
           </h2>
-          <p className="text-center mb-14" style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif" }}>
-            Three simple steps. Sixty transformative days.
+          <p className="text-center mb-10" style={{ color: "var(--muted)", fontFamily: "Inter, sans-serif" }}>
+            Four simple steps. Sixty transformative days. Public proof that recruiters check.
           </p>
         </ScrollReveal>
+
+        <div className="mb-12">
+          <ProofOfWorkPipeline currentStep={3} />
+        </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {STEPS.map((s, i) => (
