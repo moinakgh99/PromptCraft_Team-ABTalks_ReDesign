@@ -1,0 +1,10 @@
+{
+  "description": "Effortlessly create zip files of your projects or files, streamlining organization and sharing for individuals and teams.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
