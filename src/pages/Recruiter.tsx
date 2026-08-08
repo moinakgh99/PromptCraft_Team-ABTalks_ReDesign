@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { STUDENTS, type Student, type Track, TRACKS } from "@/data/mock";
 import { useStore } from "@/store";
+import CandidateCompareModal from "@/components/CandidateCompareModal";
 
 const STATUS_COLORS: Record<string, string> = {
   "on-track": "#22c55e",
@@ -464,7 +465,12 @@ export default function Recruiter() {
         />
       )}
 
-      {showCompare && <ComparePanel ids={compareList} onClose={() => setShowCompare(false)} />}
+      {showCompare && (
+        <>
+          <ComparePanel ids={compareList} onClose={() => setShowCompare(false)} />
+          <CandidateCompareModal onClose={() => setShowCompare(false)} />
+        </>
+      )}
     </div>
   );
 }

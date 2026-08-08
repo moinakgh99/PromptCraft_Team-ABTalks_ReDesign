@@ -15,7 +15,7 @@ const MOCK_ADMINS = ["Aditya Singh · ABTalks Core", "Tanvir Hussain · ABTalks 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useStore();
-  const [selectedRole, setSelectedRole] = useState<Role | null>(null);
+  const [selectedRole, setSelectedRole] = useState<Role>("student");
   const [selectedStudent, setSelectedStudent] = useState(STUDENTS[0]);
   const [selectedRecruiter, setSelectedRecruiter] = useState(MOCK_RECRUITERS[0]);
   const [selectedAdmin, setSelectedAdmin] = useState(MOCK_ADMINS[0]);
@@ -101,17 +101,21 @@ export default function Login() {
         {selectedRole === "student" && (
           <div className="rounded-2xl p-4 mb-5" style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.07)" }}>
             <label style={{ color: "#94a3b8", fontSize: "0.8rem", fontFamily: "Inter, sans-serif", display: "block", marginBottom: 10 }}>
-              Continue as
+              Click a profile to continue
             </label>
             <div className="flex flex-col gap-2">
               {STUDENTS.map((s) => (
                 <button
                   key={s.id}
-                  onClick={() => setSelectedStudent(s)}
-                  className="flex items-center gap-3 rounded-xl p-3 text-left transition-all"
+                  onClick={() => {
+                    setSelectedStudent(s);
+                    login("student", s);
+                    navigate("/dashboard");
+                  }}
+                  className="flex items-center gap-3 rounded-xl p-3 text-left transition-all hover:border-indigo-500/60 hover:bg-indigo-500/10"
                   style={{
-                    background: selectedStudent.id === s.id ? "rgba(99,102,241,0.12)" : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${selectedStudent.id === s.id ? "rgba(99,102,241,0.5)" : "rgba(255,255,255,0.05)"}`,
+                    background: selectedStudent.id === s.id ? "rgba(99,102,241,0.15)" : "rgba(255,255,255,0.02)",
+                    border: `1px solid ${selectedStudent.id === s.id ? "rgba(99,102,241,0.6)" : "rgba(255,255,255,0.05)"}`,
                     cursor: "pointer",
                   }}
                 >
@@ -120,7 +124,9 @@ export default function Login() {
                     <div style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, color: "var(--text)", fontSize: "0.88rem" }}>{s.name}</div>
                     <div style={{ color: "var(--muted)", fontSize: "0.72rem", fontFamily: "Inter, sans-serif" }}>{s.college} · {s.track} · 🔥 {s.streak}-day streak</div>
                   </div>
-                  {selectedStudent.id === s.id && <span style={{ color: "var(--primary)", fontSize: "0.8rem", flexShrink: 0 }}>✓</span>}
+                  <span style={{ color: "var(--primary-light)", fontSize: "0.78rem", fontWeight: 600, flexShrink: 0 }}>
+                    Select & Go →
+                  </span>
                 </button>
               ))}
             </div>
@@ -130,23 +136,29 @@ export default function Login() {
         {selectedRole === "recruiter" && (
           <div className="rounded-2xl p-4 mb-5" style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.07)" }}>
             <label style={{ color: "#94a3b8", fontSize: "0.8rem", fontFamily: "Inter, sans-serif", display: "block", marginBottom: 10 }}>
-              Continue as
+              Click a profile to continue
             </label>
             <div className="flex flex-col gap-2">
               {MOCK_RECRUITERS.map((r) => (
                 <button
                   key={r}
-                  onClick={() => setSelectedRecruiter(r)}
-                  className="flex items-center gap-3 rounded-xl p-3 text-left transition-all"
+                  onClick={() => {
+                    setSelectedRecruiter(r);
+                    login("recruiter");
+                    navigate("/recruiter");
+                  }}
+                  className="flex items-center gap-3 rounded-xl p-3 text-left transition-all hover:border-cyan-500/60 hover:bg-cyan-500/10"
                   style={{
-                    background: selectedRecruiter === r ? "rgba(6,182,212,0.1)" : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${selectedRecruiter === r ? "rgba(6,182,212,0.4)" : "rgba(255,255,255,0.05)"}`,
+                    background: selectedRecruiter === r ? "rgba(6,182,212,0.15)" : "rgba(255,255,255,0.02)",
+                    border: `1px solid ${selectedRecruiter === r ? "rgba(6,182,212,0.5)" : "rgba(255,255,255,0.05)"}`,
                     cursor: "pointer",
                   }}
                 >
                   <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(6,182,212,0.15)", fontSize: "1rem" }}>🔍</div>
                   <span style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, color: "var(--text)", fontSize: "0.88rem" }}>{r}</span>
-                  {selectedRecruiter === r && <span style={{ color: "var(--secondary)", fontSize: "0.8rem", marginLeft: "auto" }}>✓</span>}
+                  <span style={{ color: "var(--secondary)", fontSize: "0.78rem", fontWeight: 600, marginLeft: "auto" }}>
+                    Select & Go →
+                  </span>
                 </button>
               ))}
             </div>
@@ -156,23 +168,29 @@ export default function Login() {
         {selectedRole === "admin" && (
           <div className="rounded-2xl p-4 mb-5" style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.07)" }}>
             <label style={{ color: "#94a3b8", fontSize: "0.8rem", fontFamily: "Inter, sans-serif", display: "block", marginBottom: 10 }}>
-              Continue as
+              Click a profile to continue
             </label>
             <div className="flex flex-col gap-2">
               {MOCK_ADMINS.map((a) => (
                 <button
                   key={a}
-                  onClick={() => setSelectedAdmin(a)}
-                  className="flex items-center gap-3 rounded-xl p-3 text-left transition-all"
+                  onClick={() => {
+                    setSelectedAdmin(a);
+                    login("admin");
+                    navigate("/admin");
+                  }}
+                  className="flex items-center gap-3 rounded-xl p-3 text-left transition-all hover:border-amber-500/60 hover:bg-amber-500/10"
                   style={{
-                    background: selectedAdmin === a ? "rgba(245,158,11,0.1)" : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${selectedAdmin === a ? "rgba(245,158,11,0.4)" : "rgba(255,255,255,0.05)"}`,
+                    background: selectedAdmin === a ? "rgba(245,158,11,0.15)" : "rgba(255,255,255,0.02)",
+                    border: `1px solid ${selectedAdmin === a ? "rgba(245,158,11,0.5)" : "rgba(255,255,255,0.05)"}`,
                     cursor: "pointer",
                   }}
                 >
                   <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: "rgba(245,158,11,0.15)", fontSize: "1rem" }}>⚙️</div>
                   <span style={{ fontFamily: "Space Grotesk, sans-serif", fontWeight: 600, color: "var(--text)", fontSize: "0.88rem" }}>{a}</span>
-                  {selectedAdmin === a && <span style={{ color: "#f59e0b", fontSize: "0.8rem", marginLeft: "auto" }}>✓</span>}
+                  <span style={{ color: "#f59e0b", fontSize: "0.78rem", fontWeight: 600, marginLeft: "auto" }}>
+                    Select & Go →
+                  </span>
                 </button>
               ))}
             </div>

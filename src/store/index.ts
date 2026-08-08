@@ -3,6 +3,8 @@ import {
   STUDENTS, FLAGGED_SUBMISSIONS,
   type Student, type FlaggedSubmission, type Track,
 } from "@/data/mock";
+import { api, AICoachInsight } from "@/services/api";
+import { adaptBackendStudent, adaptLeaderboardEntry, resolveBackendStudentId } from "@/services/apiAdapter";
 
 export type Role = "student" | "recruiter" | "admin";
 
@@ -57,7 +59,6 @@ interface XPConfig {
   perfectSubmission: number;
 }
 
-// ─── localStorage helpers ─────────────────────────────────────────────────────
 const LS_ROLE = "abtalks_role";
 const LS_STUDENT = "abtalks_student_id";
 
@@ -80,8 +81,16 @@ interface AppStore {
   login: (role: Role, student?: Student) => void;
   logout: () => void;
 
-  // current user
+  // current user & backend integration
   currentStudent: Student;
+  studentsList: Student[];
+  aiCoachInsight: AICoachInsight | null;
+  isBackendConnected: boolean;
+
+  fetchCurrentStudent: (studentId?: string) => Promise<void>;
+  fetchLeaderboard: () => Promise<void>;
+  fetchAICoachInsight: () => Promise<void>;
+  recoverStreakToken: () => Promise<void>;
 
   // Theme
   theme: Theme;
@@ -106,6 +115,7 @@ interface AppStore {
   // Day submission state
   submittedDays: Set<number>;
   submitDay: (day: number) => void;
+  submitChallengeDay: (day: number, githubLink?: string, linkedinLink?: string) => Promise<void>;
 
   // Admin nudge sent
   nudgeSent: Set<string>;
@@ -117,7 +127,7 @@ interface AppStore {
   clearCompare: () => void;
 }
 
-export const useStore = create<AppStore>((set) => ({
+export const useStore = create<AppStore>((set, get) => ({
   role: initialAuth.role,
   login: (role, student) => {
     const s = student ?? STUDENTS[0];
@@ -126,6 +136,7 @@ export const useStore = create<AppStore>((set) => ({
       localStorage.setItem(LS_STUDENT, s.id);
     } catch { /* ignore */ }
     set({ role, currentStudent: s });
+    get().fetchCurrentStudent(s.id);
   },
   logout: () => {
     try {
@@ -136,6 +147,55 @@ export const useStore = create<AppStore>((set) => ({
   },
 
   currentStudent: initialAuth.currentStudent,
+  studentsList: STUDENTS,
+  aiCoachInsight: null,
+  isBackendConnected: false,
+
+  fetchCurrentStudent: async (studentId) => {
+    const rawId = studentId || get().currentStudent.id || "student-far";
+    const targetId = resolveBackendStudentId(rawId);
+    try {
+      const res = await api.getStudentProfile(targetId);
+      const student = adaptBackendStudent(res.student);
+      set({ currentStudent: student, isBackendConnected: true });
+    } catch (err) {
+      console.warn("Backend API unavailable, using local store fallback:", err);
+      set({ isBackendConnected: false });
+    }
+  },
+
+  fetchLeaderboard: async () => {
+    try {
+      const leaderboardEntries = await api.getLeaderboard("xp");
+      if (leaderboardEntries && leaderboardEntries.length > 0) {
+        const adaptedList = leaderboardEntries.map(adaptLeaderboardEntry);
+        set({ studentsList: adaptedList, isBackendConnected: true });
+      }
+    } catch (err) {
+      console.warn("Backend leaderboard unavailable:", err);
+    }
+  },
+
+  fetchAICoachInsight: async () => {
+    const student = get().currentStudent;
+    try {
+      const insight = await api.getAICoachInsight(student.id || "student-far");
+      set({ aiCoachInsight: insight, isBackendConnected: true });
+    } catch (err) {
+      console.warn("AI Coach API unavailable:", err);
+    }
+  },
+
+  recoverStreakToken: async () => {
+    const student = get().currentStudent;
+    try {
+      const res = await api.recoverStreak(student.id);
+      const updated = adaptBackendStudent(res);
+      set({ currentStudent: updated, isBackendConnected: true });
+    } catch (err: any) {
+      console.warn("Streak recovery API error:", err.message);
+    }
+  },
 
   theme: "Dark",
   setTheme: (t) => {
@@ -143,7 +203,6 @@ export const useStore = create<AppStore>((set) => ({
     const root = document.documentElement;
     Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
     root.setAttribute("data-theme", t.toLowerCase());
-    // body background
     document.body.style.backgroundColor = vars["--bg"];
     document.body.style.color = vars["--text"];
     set({ theme: t });
@@ -175,6 +234,36 @@ export const useStore = create<AppStore>((set) => ({
   submittedDays: new Set(),
   submitDay: (day) =>
     set((s) => ({ submittedDays: new Set([...s.submittedDays, day]) })),
+
+  submitChallengeDay: async (day, githubLink, linkedinLink) => {
+    const student = get().currentStudent;
+    const ghRepo = githubLink && githubLink.includes("github.com") ? githubLink : `https://github.com/${student.id}/abtalks-day${day}`;
+    const ghCommit = `${ghRepo}/commit/abc${day}`;
+    const liPost = linkedinLink && linkedinLink.includes("linkedin.com") ? linkedinLink : `https://linkedin.com/posts/${student.id}-day${day}`;
+
+    try {
+      const res = await api.submitChallenge(day, {
+        studentId: student.id || "student-far",
+        githubRepoUrl: ghRepo,
+        githubCommitUrl: ghCommit,
+        linkedinPostUrl: liPost,
+      });
+
+      const updated = adaptBackendStudent(res.updatedStudent);
+      if (res.aiCoachInsight) {
+        set({ aiCoachInsight: res.aiCoachInsight });
+      }
+
+      set((state) => ({
+        currentStudent: updated,
+        submittedDays: new Set([...state.submittedDays, day]),
+        isBackendConnected: true,
+      }));
+    } catch (err: any) {
+      console.warn("Backend submit fallback:", err.message);
+      get().submitDay(day);
+    }
+  },
 
   nudgeSent: new Set(),
   sendNudge: (id) =>
