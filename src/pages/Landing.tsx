@@ -387,7 +387,7 @@ export default function Landing() {
       {/* ── Footer ── */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "24px 16px", textAlign: "center" }}>
         <p style={{ color: "var(--subtle)", fontSize: "0.85rem", fontFamily: "Inter, sans-serif" }}>
-          © 2024 ABTalks · Built for India&apos;s Next-Gen Developers
+          © 2026 ABTalks · Built for India&apos;s Next-Gen Developers
         </p>
       </footer>
     </div>
