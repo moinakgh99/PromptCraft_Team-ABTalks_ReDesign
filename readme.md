@@ -1,183 +1,203 @@
 # ABTalks Redesign
 
-A premium, mobile-first redesign of ABTalks — a platform that runs a 60-day coding challenge for students. Built for the ABTalks Hackathon with React, Tailwind CSS, Framer Motion, and a real Express backend.
+> A premium, mobile-first redesign of **ABTalks**, a 60-day coding challenge platform for college students. Built for the **ABTalks Hackathon** with React, Tailwind CSS, Framer Motion, Zustand, and an Express REST API.
 
-**Live demo:** [abtalks-redesign-sigma.vercel.app](https://abtalks-redesign-sigma.vercel.app)
+**Live Demo:** https://abtalks-redesign-sigma.vercel.app
 
 <p align="center">
   <img alt="React" src="https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white" />
   <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite&logoColor=white" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.7-3178c6?style=flat-square&logo=typescript&logoColor=white" />
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-v4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white" />
+  <img alt="Tailwind%20CSS" src="https://img.shields.io/badge/Tailwind_CSS-v4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white" />
   <img alt="Express" src="https://img.shields.io/badge/Express-Node_22-339933?style=flat-square&logo=express&logoColor=white" />
 </p>
+
 <p align="center">
   <img alt="Mobile-first" src="https://img.shields.io/badge/design-mobile--first%20390px-6366f1?style=flat-square" />
   <img alt="Theme" src="https://img.shields.io/badge/theme-dark%20default-111827?style=flat-square" />
-  <img alt="Deployed on Vercel" src="https://img.shields.io/badge/deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
+  <img alt="Vercel" src="https://img.shields.io/badge/deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" />
   <img alt="License" src="https://img.shields.io/badge/license-MIT-4f46e5?style=flat-square" />
 </p>
 
 ---
 
+## Overview
+
+ABTalks is designed around a simple commitment:
+
+> **Build something every day for 60 days — and prove it.**
+
+Students choose a track, complete a daily coding challenge, and submit proof of work through a GitHub commit and LinkedIn post. The resulting consistency and portfolio of work help students build momentum and improve recruiter visibility.
+
+This redesign focuses on a polished, mobile-first experience at a **390px viewport**, while also providing bonus recruiter and admin experiences.
+
+---
+
 ## Screenshots
 
-All three required routes, captured at the 390px mobile viewport.
+The three required routes are designed for a 390px mobile viewport.
 
-| Landing (`/`) | Dashboard (`/dashboard`) | Challenge Day (`/day/12`) |
+| Landing | Dashboard | Challenge Day |
 |---|---|---|
-| ![Landing page](docs/screenshots/landing.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![Challenge day](docs/screenshots/day-12.png) |
+| ![Landing page](docs/screenshots/landing.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![Challenge Day](docs/screenshots/day-12.png) |
 
-<details>
-<summary>How to (re)capture these</summary>
+### Capturing Screenshots
 
-1. Run the app locally (see [Getting Started](#getting-started)) or open the [live demo](https://abtalks-redesign-sigma.vercel.app).
-2. Open Chrome DevTools → toggle device toolbar → set viewport to **390 × 844** (iPhone 12/13/14 preset is close enough).
-3. Log in as `student-far` (or any seed student — see [Seed Students](#seed-students)) so the Dashboard and Day 12 routes aren't stuck on the login screen.
-4. Capture each route:
-   - `/` — landing page, scrolled to top
-   - `/dashboard`
-   - `/day/12`
-5. Save as PNG into `docs/screenshots/` using the exact filenames above (`landing.png`, `dashboard.png`, `day-12.png`) so the table renders without edits.
-
-</details>
+1. Run the app locally or open the live demo.
+2. Open Chrome DevTools and enable the device toolbar.
+3. Use a **390 × 844** viewport.
+4. Log in with `student-far` or another seeded student.
+5. Capture `/`, `/dashboard`, and `/day/12`.
+6. Save the images as `docs/screenshots/landing.png`, `dashboard.png`, and `day-12.png`.
 
 ---
 
-## Table of Contents
-
-- [What This Is](#what-this-is)
-- [Screenshots](#screenshots)
-- [Core Screens](#core-screens)
-- [Features](#features)
-- [Edge Cases Handled](#edge-cases-handled)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Backend API Reference](#backend-api-reference)
-- [Seed Students](#seed-students)
-- [Deployment](#deployment)
-- [Known Limitations](#known-limitations)
-
----
-
-## What This Is
-
-ABTalks runs a 60-day coding challenge for college students. Every day, a student picks a track, builds something, and proves it with a **GitHub commit** and a **LinkedIn post** — that proof of work is what keeps their streak alive and makes them visible to recruiters.
-
-This redesign focuses on three required, mobile-first (390px) screens:
+## Routes
 
 | Route | Purpose |
 |---|---|
-| `/` | Landing page — introduces ABTalks to a student who's never heard of it |
-| `/dashboard` | Student's home screen — streak, today's task, progress, XP, achievements |
-| `/day/:day` | A single challenge day — read the task, submit proof of work |
-
-Two additional screens (`/recruiter`, `/admin`) were built as bonus scope beyond the core brief.
+| `/` | Landing page introducing ABTalks to a first-time student |
+| `/dashboard` | Student home: streak, today's task, progress, XP, achievements |
+| `/day/:day` | Individual challenge with task details and proof-of-work submission |
+| `/recruiter` | Recruiter-facing student discovery dashboard *(bonus)* |
+| `/admin` | Internal challenge-management dashboard *(bonus)* |
 
 ---
 
-## Core Screens
+## Core Experience
 
-### 1. Landing (`/`)
-Hero section, "how it works" walkthrough, track preview (Fullstack Web / AI & Machine Learning / Systems & Cloud / Mobile & Cross-Platform), trust signals, and a clear call to action — designed to build enough confidence for a first-time visitor to commit to 60 days.
+### Landing — `/`
 
-### 2. Dashboard (`/dashboard`)
-The student's home base after logging in:
+- Hero with gradient headline and CTA
+- Three-step "How It Works" section
+- Trust and social-proof signals
+- Coding-track preview
+- Final CTA
+
+### Dashboard — `/dashboard`
+
 - Current streak, XP, level, and days completed
-- Today's challenge with a direct link to start it
-- Circular progress ring + XP bar with animated fills
-- GitHub-style build heatmap
-- Recruiter visibility meter
-- AI Momentum Coach insight card
-- Journey timeline and achievements
+- Today's challenge with direct navigation
+- Animated progress ring and XP bar
+- GitHub-style 60-day build heatmap
+- Recruiter Visibility Score
+- AI Momentum Coach insight
+- Journey timeline
+- Achievements and badges
 
-### 3. Challenge Day (`/day/:day`)
-- Full task description, learning objectives, and build checklist
-- Step-by-step "how to complete this" walkthrough
-- Submission form (GitHub repo URL, GitHub commit URL, LinkedIn post URL)
-- Animated success state with XP breakdown, AI coach summary, and any daily reward unlocked
+### Challenge Day — `/day/:day`
+
+- Full task description and learning objectives
+- Build checklist and step-by-step guidance
+- GitHub repository URL
+- GitHub commit URL
+- LinkedIn post URL
+- Animated submission confirmation
+- XP breakdown
+- AI Momentum Coach summary
+- Daily reward reveal
 
 ---
 
-## Features
+## Key Features
 
-- **XP & Level System** — Explorer → Builder → Creator → Architect → Legend, driven by real XP thresholds calculated server-side
-- **Streak tracking** — including streak-freeze tokens to recover a missed day
-- **Achievements & badges** — unlocked based on real submission history
-- **Build Heatmap** — GitHub-contribution-style grid of the last 60 days
-- **AI Momentum Coach** — post-submission summary (percentile, completion probability, next-day difficulty, suggested coding time) generated from templated pools + the student's real stats — no external AI call, by design
-- **Daily Reward Box** — weighted-random reward (XP bonus, streak freeze, theme unlock, badge) on each submission
-- **Recruiter Visibility Score** — computed from commit activity, LinkedIn posts, completion rate, and streak
-- **Theme switcher** — Dark / Cyber / Glass / Neon / Minimal, applied via CSS variables
+- **XP & Level System** — Explorer → Builder → Creator → Architect → Legend
+- **Streak Tracking** — active streaks, missed-day recovery, and streak-freeze tokens
+- **Achievements & Badges** — unlocked from submission history
+- **Build Heatmap** — GitHub-style 60-day contribution grid
+- **AI Momentum Coach** — percentile, completion probability, next-day difficulty, and suggested coding time
+- **Daily Reward Box** — XP bonuses, streak freezes, theme unlocks, and badges
+- **Recruiter Visibility Score** — based on commit activity, LinkedIn activity, completion rate, and streak
+- **Theme Switcher** — Dark, Cyber, Glass, Neon, and Minimal
 - **Leaderboard & Community Spotlight**
 
+The AI Momentum Coach uses templated/derived data and student statistics; **no external AI API is required**.
+
 ---
 
-## Edge Cases Handled
+## Edge Cases
 
-- **First-day / no streak yet** — brand-new student sees an "ignite your streak" state instead of empty stat blocks
-- **Missed a day** — supportive "you missed yesterday, restart today" messaging instead of a harsh streak-reset; a streak-freeze token can recover it
-- **Empty profile** — guided setup prompts (avatar, track, bio) instead of blank fields
+| State | Experience |
+|---|---|
+| First day / no streak | "Ignite your streak" state instead of empty statistics |
+| Missed day | Supportive recovery messaging instead of a harsh reset |
+| Empty profile | Guided setup for avatar, track, and bio |
 
 ---
 
 ## Tech Stack
 
-**Frontend**
-- React 19 + Vite 8
+### Frontend
+
+- React 19
+- Vite 8
+- TypeScript
 - Tailwind CSS v4
 - React Router v7
-- Framer Motion (animation)
-- Zustand (client state)
-- Recharts (charts)
+- Framer Motion
+- Zustand
+- Recharts
 
-**Backend**
-- Node 22 + Express
+### Backend
+
+- Node.js 22
+- Express
 - TypeScript
-- In-memory data store seeded from static JSON (no database — mocked by design)
+- In-memory data store
+- Static JSON seed data
+- REST API
+
+No production database is required by the challenge brief; the backend uses seeded in-memory data by design.
 
 ---
 
 ## Project Structure
 
-```
+```text
 .
 ├── backend/
 │   ├── src/
-│   │   ├── server.ts          # Express app + all route handlers
-│   │   ├── services/          # Business logic (ABTalksService, in-memory store)
-│   │   ├── utils/formulas.ts  # XP, streak, level, recruiter-score calculations
-│   │   ├── types/             # Shared TypeScript types
-│   │   └── data/*.json        # Seed data: students, challenges, achievements, rewards
+│   │   ├── server.ts
+│   │   ├── services/
+│   │   ├── utils/
+│   │   │   └── formulas.ts
+│   │   ├── types/
+│   │   └── data/
+│   │       └── *.json
 │   ├── tests/
 │   └── package.json
-├── src/                        # Frontend (Vite root)
-│   ├── pages/                  # Landing, Login, Dashboard, DayChallenge, Recruiter, Admin
-│   ├── components/              # Nav, ProtectedRoute, ThemeInitializer, etc.
+│
+├── src/
+│   ├── pages/
+│   ├── components/
 │   ├── services/
-│   │   ├── api.ts               # Typed fetch client against the backend
-│   │   └── apiAdapter.ts        # Maps backend responses into frontend view models
-│   ├── data/mock.ts             # Fallback/legacy mock data
-│   └── store/index.ts           # Zustand store (auth, theme)
+│   │   ├── api.ts
+│   │   └── apiAdapter.ts
+│   ├── data/
+│   │   └── mock.ts
+│   └── store/
+│       └── index.ts
+│
 ├── public/
+├── docs/
+│   └── screenshots/
 ├── index.html
 ├── vite.config.ts
-└── package.json                 # Frontend root package.json (Vite build lives here)
+└── package.json
 ```
 
-> The frontend `package.json` lives at the **repo root** — `src/`, `index.html`, and `vite.config.ts` are not nested inside a `frontend/` folder. Keep this in mind when configuring any deploy platform's Root Directory (see [Deployment](#deployment)).
+> **Important:** The frontend is rooted at the repository root. There is no separate `frontend/` directory.
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 22 (pinned in `.mise.toml`)
-- npm (or pnpm — both lockfiles are present)
 
-### 1. Install and run the backend
+- Node.js 22
+- npm or pnpm
+
+### 1. Start the Backend
 
 ```bash
 cd backend
@@ -185,92 +205,171 @@ npm install
 npm run dev
 ```
 
-This starts the API on **http://localhost:3001** (`tsx watch`, hot-reloads on save).
+API:
 
-### 2. Install and run the frontend
+```text
+http://localhost:3001
+```
 
-In a separate terminal, from the repo root:
+### 2. Start the Frontend
+
+Open a second terminal from the repository root:
 
 ```bash
 npm install
 npm run dev
 ```
 
-This starts Vite on **http://localhost:8443** (or whatever `PORT` is set to).
+Frontend:
 
-> Both must be running at the same time for the app to work end-to-end — the frontend calls the backend directly over HTTP, there's no proxy layer.
+```text
+http://localhost:8443
+```
 
-### 3. Open the app
-Visit the frontend URL, pick a student on the login screen, and explore.
+### 3. Explore
+
+Open the frontend and select one of the seeded students on the login screen.
+
+> Both frontend and backend must be running for the complete end-to-end experience.
 
 ---
 
-## Environment Variables
+## API Configuration
 
-The frontend currently points at the backend via a **hardcoded** constant:
+The frontend currently uses:
 
 ```ts
 // src/services/api.ts
 export const API_BASE_URL = "http://localhost:3001/api";
 ```
 
-There's no `.env` / `VITE_API_URL` wiring yet — if you deploy the backend somewhere other than `localhost:3001`, update this constant (or introduce an env var) before deploying the frontend, or every API call will fail in production.
+There is currently no `VITE_API_URL` environment-variable wiring.
+
+If the backend is deployed elsewhere, update the API base URL before deploying the frontend.
 
 ---
 
-## Backend API Reference
+## Backend API
 
-Base URL: `http://localhost:3001/api`
+**Base URL:** `http://localhost:3001/api`
 
-| Method | Endpoint | Description |
+| Method | Endpoint | Purpose |
 |---|---|---|
 | GET | `/health` | Health check |
-| GET | `/student/:id` | Full student profile, streak state, recruiter score, leaderboard rank |
-| GET | `/challenges?studentId=` | All 60 challenge days, with lock state relative to the student |
-| GET | `/challenges/:day?studentId=` | Single challenge day |
-| POST | `/challenges/:day/submit` | Submit proof of work — returns XP earned, level change, achievements, reward, AI coach insight |
+| GET | `/student/:id` | Student profile, streak, recruiter score, rank |
+| GET | `/challenges?studentId=` | All 60 challenges with lock state |
+| GET | `/challenges/:day?studentId=` | Single challenge |
+| POST | `/challenges/:day/submit` | Submit proof and receive XP/reward results |
 | GET | `/student/:id/heatmap` | 60-day submission heatmap |
-| GET | `/student/:id/achievements` | Achievement catalog with unlock status |
-| GET | `/leaderboard?sortBy=xp\|streak\|completion\|achievements` | Ranked student list |
-| GET | `/community/spotlight` | Top 5 students by XP |
+| GET | `/student/:id/achievements` | Achievement catalog and status |
+| GET | `/leaderboard?sortBy=xp\|streak\|completion\|achievements` | Ranked students |
+| GET | `/community/spotlight` | Top five students by XP |
 | GET | `/student/:id/ai-coach` | AI Momentum Coach insight |
-| POST | `/student/:id/profile` | Update avatar / bio / track / theme |
-| POST | `/student/:id/recover-streak` | Spend a streak-freeze token to recover a missed day |
-| POST | `/admin/reset` | Reset all in-memory data back to the seed |
-| POST | `/admin/system-date` | Override the server's "current date" — useful for deterministically testing streak/missed-day states without waiting a real day |
+| POST | `/student/:id/profile` | Update avatar, bio, track, and theme |
+| POST | `/student/:id/recover-streak` | Spend a streak-freeze token |
+| POST | `/admin/reset` | Reset in-memory data |
+| POST | `/admin/system-date` | Override server date for deterministic testing |
 
-All responses are wrapped as `{ success: true, data }` or `{ success: false, error: { code, message } }`.
+API responses use:
+
+```json
+{
+  "success": true,
+  "data": {}
+}
+```
+
+or:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "...",
+    "message": "..."
+  }
+}
+```
 
 ---
 
 ## Seed Students
 
-The backend ships with 6 pre-seeded students, each covering a different state on purpose:
-
-| ID | Name | Notes |
+| ID | Name | State |
 |---|---|---|
-| `student-fresh` | Jordan Lee | Day 0, empty profile — first-time state |
-| `student-far` | Alex Mercer | 42 days in, 14-day streak, on track |
-| `student-missed` | Taylor Vance | Missed a day — streak recovery available |
-| `student-sarah` | Sarah Chen | 58-day streak, near graduation |
-| `student-dev` | Devon Miller | 32 days in, 28-day streak |
-| `student-maya` | Maya Patel | 24 days in, 20-day streak |
+| `student-fresh` | Jordan Lee | Day 0, empty profile |
+| `student-far` | Alex Mercer | 42 days completed, 14-day streak |
+| `student-missed` | Taylor Vance | Missed a day; recovery available |
+| `student-sarah` | Sarah Chen | 58-day streak; near graduation |
+| `student-dev` | Devon Miller | 32 days completed, 28-day streak |
+| `student-maya` | Maya Patel | 24 days completed, 20-day streak |
 
-There's no real authentication — the login screen just lets you pick one of these to view.
+### Authentication
+
+There is **no real authentication or user-account system**. The login screen simply lets users select a seeded student so the different product states can be explored without a production auth system.
 
 ---
 
 ## Deployment
 
-- **Frontend** is deployed on Vercel: [abtalks-redesign-sigma.vercel.app](https://abtalks-redesign-sigma.vercel.app)
-- Framework preset: Vite. Build command: `npm run build`. Output directory: `dist`.
-- **Root Directory matters:** the frontend's `package.json` lives at the repo root, not inside a `frontend/` subfolder. If your Vercel project's Root Directory setting is anything other than blank/`.`, the build will fail immediately before installing dependencies.
-- **Backend** needs to run as a persistent Node process (`node dist/server.js` after `npm run build`) — it's a plain Express app using `app.listen()`, not a set of serverless functions, so it is **not** deployable to Vercel as-is. Use a platform that runs long-lived processes (Render, Railway, Fly.io, etc.), and update `API_BASE_URL` in the frontend to point at wherever it ends up.
+### Frontend
+
+**Live Demo:** https://abtalks-redesign-sigma.vercel.app
+
+Recommended Vercel configuration:
+
+```text
+Framework Preset: Vite
+Build Command: npm run build
+Output Directory: dist
+Root Directory: .
+```
+
+The frontend package lives at the repository root, so the Vercel Root Directory should remain blank or `.`.
+
+### Backend
+
+The Express backend uses a persistent `app.listen()` process and is **not deployable to Vercel as-is**.
+
+For production, deploy the backend on a platform supporting long-running Node.js processes, such as Render, Railway, or Fly.io, then update the frontend API base URL.
 
 ---
 
 ## Known Limitations
 
-- No real authentication, real user accounts, or production database — by design, per the challenge brief (mocked data is sufficient).
-- `API_BASE_URL` is hardcoded rather than environment-driven — see [Environment Variables](#environment-variables).
-- The Recruiter and Admin panels are bonus scope beyond the required three routes and are not covered by the same edge-case guarantees as the student-facing flow.
+- No real authentication or user accounts — intentionally omitted according to the challenge brief.
+- No production database — seeded in-memory data is used.
+- `API_BASE_URL` is currently hardcoded to `localhost:3001`.
+- The backend requires a separate persistent Node.js deployment for production use.
+- Recruiter and Admin are bonus routes beyond the three required student-facing routes.
+- Recruiter and Admin do not have the same edge-case coverage as the core student flow.
+
+---
+
+## Hackathon Scope
+
+### Required
+
+- Landing page
+- Student dashboard
+- Daily challenge page
+- GitHub + LinkedIn proof-of-work submission
+- Mobile-first 390px experience
+- Responsive UI
+- Seeded/mock challenge data
+
+### Bonus
+
+- Recruiter dashboard
+- Admin panel
+- XP and level system
+- Build heatmap
+- Recruiter visibility score
+- AI Momentum Coach
+- Daily rewards
+- Theme system
+- Leaderboard
+- Community spotlight
+
+---
+
