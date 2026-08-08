@@ -1,0 +1,107 @@
+[
+  {
+    "id": "ach-first-step",
+    "name": "First Step",
+    "description": "Complete your very first daily challenge",
+    "icon": "🚀",
+    "unlockCondition": { "type": "completed_days", "value": 1 }
+  },
+  {
+    "id": "ach-streak-3",
+    "name": "Consistency Ignition",
+    "description": "Maintain a 3-day consecutive coding streak",
+    "icon": "🔥",
+    "unlockCondition": { "type": "streak", "value": 3 }
+  },
+  {
+    "id": "ach-streak-7",
+    "name": "Unstoppable Momentum",
+    "description": "Maintain a 7-day consecutive coding streak",
+    "icon": "⚡",
+    "unlockCondition": { "type": "streak", "value": 7 }
+  },
+  {
+    "id": "ach-streak-14",
+    "name": "Fortnight Master",
+    "description": "Maintain a 14-day consecutive coding streak",
+    "icon": "🛡️",
+    "unlockCondition": { "type": "streak", "value": 14 }
+  },
+  {
+    "id": "ach-streak-30",
+    "name": "Monthly Marathon",
+    "description": "Maintain a 30-day consecutive coding streak",
+    "icon": "🏆",
+    "unlockCondition": { "type": "streak", "value": 30 }
+  },
+  {
+    "id": "ach-builder-level",
+    "name": "Level Up: Builder",
+    "description": "Reach Builder status level (500 XP)",
+    "icon": "🛠️",
+    "unlockCondition": { "type": "level", "value": "Builder" }
+  },
+  {
+    "id": "ach-creator-level",
+    "name": "Level Up: Creator",
+    "description": "Reach Creator status level (1,500 XP)",
+    "icon": "✨",
+    "unlockCondition": { "type": "level", "value": "Creator" }
+  },
+  {
+    "id": "ach-architect-level",
+    "name": "Level Up: Architect",
+    "description": "Reach Architect status level (3,500 XP)",
+    "icon": "🏛️",
+    "unlockCondition": { "type": "level", "value": "Architect" }
+  },
+  {
+    "id": "ach-legend-level",
+    "name": "Level Up: Legend",
+    "description": "Reach Legend status level (7,000 XP)",
+    "icon": "👑",
+    "unlockCondition": { "type": "level", "value": "Legend" }
+  },
+  {
+    "id": "ach-days-15",
+    "name": "Quarter Way",
+    "description": "Complete 15 total daily challenges",
+    "icon": "🎯",
+    "unlockCondition": { "type": "completed_days", "value": 15 }
+  },
+  {
+    "id": "ach-days-30",
+    "name": "Halfway Hero",
+    "description": "Complete 30 total daily challenges",
+    "icon": "🏅",
+    "unlockCondition": { "type": "completed_days", "value": 30 }
+  },
+  {
+    "id": "ach-days-50",
+    "name": "Fifty Club",
+    "description": "Complete 50 total daily challenges",
+    "icon": "🌟",
+    "unlockCondition": { "type": "completed_days", "value": 50 }
+  },
+  {
+    "id": "ach-early-bird",
+    "name": "Early Submission Specialist",
+    "description": "Submit 5 challenges before 8:00 PM cutoff",
+    "icon": "🌅",
+    "unlockCondition": { "type": "early_submissions", "value": 5 }
+  },
+  {
+    "id": "ach-github-connected",
+    "name": "Open Source Contributor",
+    "description": "Submit a valid GitHub repository commit link",
+    "icon": "🐙",
+    "unlockCondition": { "type": "github_linked", "value": true }
+  },
+  {
+    "id": "ach-theme-collector",
+    "name": "Theme Collector",
+    "description": "Unlock at least 2 profile visual themes",
+    "icon": "🎨",
+    "unlockCondition": { "type": "theme_unlocked", "value": 2 }
+  }
+]

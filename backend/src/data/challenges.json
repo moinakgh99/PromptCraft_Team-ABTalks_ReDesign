@@ -1,0 +1,571 @@
+[
+  {
+    "day": 1,
+    "title": "Semantic HTML5 & Accessibility Audit",
+    "description": "Master accessible web design principles by building a semantic, ARIA-compliant landing page structure with automated lighthouse scoring.",
+    "learningObjectives": [
+      "Understand proper HTML5 element hierarchy (main, section, article, nav, header, footer)",
+      "Implement keyboard navigation accessibility (tabindex, focus-visible outlines)",
+      "Utilize ARIA roles and labels for screen readers"
+    ],
+    "buildChecklist": [
+      "Replace generic <div> blocks with semantic HTML5 tags",
+      "Ensure contrast ratio exceeds 4.5:1 on all text elements",
+      "Add alt text to image elements and aria-labels to interactive icons",
+      "Pass zero error threshold on AXE accessibility audit"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 2,
+    "title": "Modern CSS Grid & Flexbox Masterclass",
+    "description": "Construct a responsive dashboard grid layout without media query overload using CSS Grid repeat(auto-fit, minmax(...)) and Flexbox alignment.",
+    "learningObjectives": [
+      "Master intrinsic responsive web design patterns",
+      "Combine CSS Grid for 2D container layouts with Flexbox for 1D component alignment",
+      "Implement CSS custom property tokens for color palettes"
+    ],
+    "buildChecklist": [
+      "Create a responsive 3-column dashboard layout that stacks cleanly on mobile viewports",
+      "Implement a sidebar navigation bar with flex alignment",
+      "Use CSS variables for theme primary, secondary, and surface colors",
+      "Verify zero horizontal overflow scrollbars across all break points"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 3,
+    "title": "DOM Event Architecture & Delegation",
+    "description": "Build an efficient dynamic item feed with event delegation, custom event dispatchers, and debounced input filtering.",
+    "learningObjectives": [
+      "Understand event bubbling and capturing phases in the browser",
+      "Implement memory-efficient event listeners via root delegation",
+      "Build a custom debounce utility function for real-time search inputs"
+    ],
+    "buildChecklist": [
+      "Attach a single event listener on container root for dynamic list deletion",
+      "Implement search filter input debounced at 300ms delay",
+      "Dispatch a custom Event('feedUpdated') when items are mutated",
+      "Verify memory performance via Chrome DevTools Heap Snapshot"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 4,
+    "title": "Async JavaScript, Promises & Fetch Engine",
+    "description": "Construct a resilient HTTP API client supporting retry mechanisms, exponential backoff, request timeouts, and global error handling.",
+    "learningObjectives": [
+      "Deep dive into Promise lifecycle states and microtask queue execution order",
+      "Implement AbortController for cancelable network fetch requests",
+      "Handle HTTP status code edge cases (4xx, 5xx, network offline)"
+    ],
+    "buildChecklist": [
+      "Build wrapper function fetchWithRetry(url, options, maxRetries=3)",
+      "Attach AbortController with 5-second timeout signal",
+      "Transform non-2xx responses into structured Error objects",
+      "Render visual user toast alerts upon request failure"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 5,
+    "title": "Modern ES6+ Modules & Build Tooling",
+    "description": "Set up a clean modular codebase using Native ES Modules, Vite bundler, and tree-shakable utility functions.",
+    "learningObjectives": [
+      "Understand ES module import/export semantics and module scope isolation",
+      "Configure basic Vite/Rollup bundling parameters",
+      "Organize application logic into domain services and component views"
+    ],
+    "buildChecklist": [
+      "Refactor monolithic JS script into modular export functions",
+      "Configure package.json scripts for local dev server and production bundle",
+      "Verify tree shaking removes unused module exports in production output"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 6,
+    "title": "Single Page Application (SPA) Router from Scratch",
+    "description": "Build a client-side hash and History API router supporting dynamic route parameters, route guards, and sub-views.",
+    "learningObjectives": [
+      "Understand pushState, replaceState, and popstate browser events",
+      "Implement route pattern matching with path params (e.g. /challenge/:day)",
+      "Create route protection guards for unauthenticated access"
+    ],
+    "buildChecklist": [
+      "Implement Router class with registerRoute(path, handler) method",
+      "Parse path parameters dynamically from window.location.pathname",
+      "Interception of <a> navigation clicks to perform dynamic view swaps",
+      "Handle 404 fallback page rendering"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 7,
+    "title": "Client-Side Persistence with IndexedDB & LocalStorage",
+    "description": "Build an offline-first storage adapter leveraging IndexedDB for large structured datasets and LocalStorage for user preferences.",
+    "learningObjectives": [
+      "Understand storage quotas, synchronous LocalStorage limits, and asynchronous IndexedDB transactions",
+      "Build a unified StorageAdapter interface supporting put, get, and delete operations",
+      "Handle fallback logic when browser privacy mode blocks local storage"
+    ],
+    "buildChecklist": [
+      "Initialize IndexedDB object store with index keys",
+      "Wrap IndexedDB callbacks inside native Promises",
+      "Store user active theme preference in LocalStorage",
+      "Verify offline data persistence across page reloads"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 8,
+    "title": "Advanced CSS Animations & Micro-Interactions",
+    "description": "Craft smooth 60fps micro-animations, glassmorphism cards, and interactive hover states using GPU-accelerated CSS transforms.",
+    "learningObjectives": [
+      "Understand the browser rendering pipeline (layout, paint, composite)",
+      "Restrict animations to GPU-friendly properties (transform, opacity)",
+      "Implement cubic-bezier timing functions for fluid motion feeling"
+    ],
+    "buildChecklist": [
+      "Build a glassmorphism card component with backdrop-filter: blur()",
+      "Add interactive ripple hover animations to primary buttons",
+      "Ensure zero layout thrashing or paint reflows during animation execution",
+      "Include prefers-reduced-motion media query support"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 9,
+    "title": "Complex Form Validation & UX Architecture",
+    "description": "Design an interactive multi-step wizard form with real-time field validation, error message announcements, and dirty-state tracking.",
+    "learningObjectives": [
+      "Implement custom reactive form state validation engines",
+      "Utilize Constraint Validation API and custom validator functions",
+      "Provide accessible error summary callouts"
+    ],
+    "buildChecklist": [
+      "Implement multi-step pagination state",
+      "Validate URLs, emails, and length requirements on keypress/blur",
+      "Disable step progression until current step inputs are valid",
+      "Announce form submission success via ARIA live region"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 10,
+    "title": "TypeScript Core Types, Interfaces & Generics",
+    "description": "Convert JS logic to strongly-typed TypeScript modules with custom generic interfaces, utility types, and strict mode compliance.",
+    "learningObjectives": [
+      "Master generics, type guards, discriminated unions, and record maps",
+      "Configure tsconfig.json with strict: true",
+      "Eliminate all 'any' types from application code"
+    ],
+    "buildChecklist": [
+      "Define clean interfaces for domain data models",
+      "Implement type guard functions (e.g. isStudent(obj): obj is Student)",
+      "Use Readonly<T> and Partial<T> utility types appropriately",
+      "Verify zero TypeScript compilation errors with tsc --noEmit"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 11,
+    "title": "REST API Fundamentals & Express Setup",
+    "description": "Initialize an Express HTTP server with JSON middleware, standard status codes, and modular route handlers.",
+    "learningObjectives": [
+      "Understand HTTP verbs (GET, POST, PUT, DELETE, PATCH) semantics",
+      "Structure Express applications into routes, controllers, and services",
+      "Handle HTTP header parsing and content negotiation"
+    ],
+    "buildChecklist": [
+      "Initialize Express server listening on configurable PORT",
+      "Mount express.json() and cors() middleware",
+      "Define standard error response envelope { success: false, error }",
+      "Write automated healthcheck endpoint GET /health"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 12,
+    "title": "Express Middleware Pipelines & Error Handling",
+    "description": "Implement custom logger middleware, request timing headers, schema validation middleware, and global error catchers.",
+    "learningObjectives": [
+      "Master Express middleware execution pipeline (req, res, next)",
+      "Implement centralized asynchronous error handler",
+      "Construct request context loggers"
+    ],
+    "buildChecklist": [
+      "Write middleware logging request method, url, and response duration",
+      "Build global error handler catch-all middleware with status code mapping",
+      "Sanitize sensitive parameters from logs",
+      "Test async route error propagation to global error handler"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 13,
+    "title": "JSON File & In-Memory Data Store Architecture",
+    "description": "Design a file-backed JSON data store with thread-safe file atomic writes, seed initialization, and state reset triggers.",
+    "learningObjectives": [
+      "Understand asynchronous non-blocking Node.js fs/promises APIs",
+      "Implement atomic file writes using temp file rename patterns",
+      "Build memory cache layer with synchronous lookup performance"
+    ],
+    "buildChecklist": [
+      "Create DataStore class reading JSON seed files on startup",
+      "Implement writeToDisk() with atomic atomic temp file replace",
+      "Add in-memory resetToSeed() helper for automated test suites",
+      "Verify store integrity under rapid concurrent operations"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 14,
+    "title": "API Input Validation & Schema Enforcement",
+    "description": "Protect REST endpoints with strict request payload validation, regex sanitization, and structured validation error payloads.",
+    "learningObjectives": [
+      "Understand boundary sanitization against SQL/NoSQL injection and XSS payloads",
+      "Construct request body validation middleware",
+      "Format multi-field validation error details"
+    ],
+    "buildChecklist": [
+      "Validate required fields on POST requests",
+      "Verify URL formatting for external links (GitHub, LinkedIn)",
+      "Return 400 Bad Request with field-level error messages array",
+      "Test payload validation with edge case input payloads"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 15,
+    "title": "Gamification Math: XP Engine & Level Thresholds",
+    "description": "Implement the complete XP calculation logic combining base XP, streak scaling bonuses, early submission cutoffs, and level thresholds.",
+    "learningObjectives": [
+      "Implement deterministic business math algorithms",
+      "Define explicit level progression tiers (Explorer -> Legend)",
+      "Compute level progression percentages and XP remainders"
+    ],
+    "buildChecklist": [
+      "Implement calculateSubmissionXP(streak, submittedAtDate)",
+      "Implement calculateLevel(xp) with min/max thresholds",
+      "Ensure streak bonus caps at maximum 150 XP ceiling",
+      "Write unit tests verifying exact XP outputs for edge cases"
+    ],
+    "difficulty": "Hard",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 16,
+    "title": "Streak Logic & Streak Freeze Token System",
+    "description": "Build consecutive day calculation logic, missed-day detection using date comparisons, and automatic streak freeze protection.",
+    "learningObjectives": [
+      "Master date difference math with custom timezones and UTC dates",
+      "Implement streak freeze token deduction business logic",
+      "Track current streak vs longest streak independently"
+    ],
+    "buildChecklist": [
+      "Build evaluateStreakState(lastSubmissionDate, currentStreak, currentDate)",
+      "Implement automatic consumption of streakFreezeTokens when missing yesterday",
+      "Verify longestStreak never decreases upon current streak reset",
+      "Test streak calculations with simulated system date shifts"
+    ],
+    "difficulty": "Hard",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 17,
+    "title": "Achievement Unlocking Evaluation Engine",
+    "description": "Build a pure functional achievement evaluator that analyzes student statistics against rule conditions and yields newly unlocked badges.",
+    "learningObjectives": [
+      "Design machine-readable condition rule structures",
+      "Implement idempotent achievement unlock state management",
+      "Timestamp achievement unlock records for history feeds"
+    ],
+    "buildChecklist": [
+      "Define AchievementCondition evaluation handlers",
+      "Evaluate streak, completed_days, xp, and level conditions",
+      "Return newly unlocked achievements list in submission payload",
+      "Ensure previously unlocked achievements are never re-triggered"
+    ],
+    "difficulty": "Hard",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 18,
+    "title": "Recruiter Visibility Score Algorithm",
+    "description": "Develop a weighted formula computing student recruiter visibility (0-100) based on GitHub commits, LinkedIn posts, completion, and consistency.",
+    "learningObjectives": [
+      "Construct transparent multi-factor scoring algorithms",
+      "Expose detailed sub-score breakdowns (commit, linkedin, completion, streak)",
+      "Scale score ranges dynamically to preserve linear motivation"
+    ],
+    "buildChecklist": [
+      "Implement calculateRecruiterScore(student, submissions)",
+      "Assign weights: 35% GitHub, 20% LinkedIn, 25% Completion, 20% Streak",
+      "Return structured score object with totalScore and sub-scores",
+      "Verify score outputs against target profile personas"
+    ],
+    "difficulty": "Hard",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 19,
+    "title": "Daily Reward Box Weighted Randomization",
+    "description": "Build a weighted random selection engine for daily reward box outcomes with claim idempotency per challenge day.",
+    "learningObjectives": [
+      "Implement weighted random distribution algorithms",
+      "Enforce idempotency to prevent duplicate reward claims on identical days",
+      "Construct rich reward outcome catalogs (XP, badges, quotes, themes)"
+    ],
+    "buildChecklist": [
+      "Build selectDailyReward(catalog) algorithm",
+      "Check existing claims before generating reward box outcome",
+      "Return reward payload with isDuplicateClaim flag",
+      "Verify statistical distribution matches catalog item weights"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 20,
+    "title": "Dynamic AI Coach Insight Generator",
+    "description": "Build a multi-factor AI insight generator providing dynamic percentile stats, completion probability estimates, and personalized recommendations.",
+    "learningObjectives": [
+      "Synthesize analytical metrics into engaging natural language insights",
+      "Estimate completion probabilities based on streak consistency",
+      "Vary output templates dynamically to prevent static messaging"
+    ],
+    "buildChecklist": [
+      "Build generateAICoachInsight(student, leaderboard)",
+      "Compute relative XP percentile within student population",
+      "Calculate completion probability curve based on streak length",
+      "Provide actionable callouts for next day challenge difficulty"
+    ],
+    "difficulty": "Hard",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 21,
+    "title": "React Component Architecture & State Hooks",
+    "description": "Build modular React UI components utilizing useState, useEffect, and custom custom hooks for reactive data fetching.",
+    "learningObjectives": [
+      "Understand React component lifecycle and hook dependency arrays",
+      "Implement clean component decomposition and prop passing",
+      "Handle loading, error, and empty states cleanly"
+    ],
+    "buildChecklist": [
+      "Create StudentCard, ChallengeList, and MetricBadge components",
+      "Build custom useStudentProfile(id) hook",
+      "Render loading skeletons during data fetching",
+      "Ensure component zero memory leaks on unmount"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 22,
+    "title": "React Context API & Global Theme Management",
+    "description": "Build a lightweight global state system using React Context API for user active themes and active student selection.",
+    "learningObjectives": [
+      "Master Context API patterns without external state library boilerplate",
+      "Implement dynamic root CSS class toggling for theme switching",
+      "Optimize context provider re-renders with useMemo"
+    ],
+    "buildChecklist": [
+      "Create ThemeContext providing activeTheme and setTheme method",
+      "Apply active theme data attribute to document root",
+      "Persist theme choice via API POST /api/student/:id/profile",
+      "Add theme selection control component"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 23,
+    "title": "Interactive Heatmap Contribution Graph",
+    "description": "Build a GitHub-style 60-day contribution graph rendering activity levels (0-4) based on submission timestamps.",
+    "learningObjectives": [
+      "Transform date-stamped logs into continuous matrix heatmaps",
+      "Implement color intensity thresholds for contribution cells",
+      "Build interactive tooltips displaying date and submission info"
+    ],
+    "buildChecklist": [
+      "Generate 60-day date matrix matching challenge dates",
+      "Map student submissions to corresponding matrix day cells",
+      "Assign CSS intensity classes (level-0 to level-4)",
+      "Render hover tooltip showing day title and submission URL"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 24,
+    "title": "Dynamic Leaderboard & Multi-Sort Filtering",
+    "description": "Construct a real-time leaderboard table supporting sorting by XP, streak length, completed days, and achievement count.",
+    "learningObjectives": [
+      "Implement multi-attribute array sorting algorithms",
+      "Handle rank tie-breaking criteria deterministically",
+      "Render rank badges (Gold, Silver, Bronze) for top 3 candidates"
+    ],
+    "buildChecklist": [
+      "Implement GET /api/leaderboard?sortBy=xp|streak|completion|achievements",
+      "Highlight active student row in leaderboard table",
+      "Add tab controls to switch sorting modes smoothly",
+      "Display student rank, level badge, streak, and XP"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 25,
+    "title": "Community Spotlight & Featured Builders",
+    "description": "Build a community spotlight module showcasing top-performing students, recent achievement unlocks, and top projects.",
+    "learningObjectives": [
+      "Derive spotlight criteria from aggregate dataset metrics",
+      "Construct visually compelling hero feature cards",
+      "Link external GitHub and LinkedIn project showcases"
+    ],
+    "buildChecklist": [
+      "Implement GET /api/community/spotlight endpoint",
+      "Select top student per track category",
+      "Render spotlight cards with bio, active theme, and external links",
+      "Add animated highlight ring around spotlight items"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 26,
+    "title": "Challenge Submission Modal & Form Validation",
+    "description": "Build a challenge submission modal with live URL pattern checking, early submission badge indicator, and submit state transitions.",
+    "learningObjectives": [
+      "Manage complex modal open/close dialog states",
+      "Validate user input fields live on change",
+      "Trigger celebratory reward modal upon successful submit response"
+    ],
+    "buildChecklist": [
+      "Create SubmissionModal dialog component",
+      "Validate GitHub Repo, Commit, and LinkedIn URLs before submission",
+      "Display submit loader spinner while API request processes",
+      "Render celebration modal displaying XP earned and unlocked rewards"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 27,
+    "title": "Daily Reward Box Opening Experience & Confetti",
+    "description": "Craft an interactive reward box opening animation with custom sound/confetti effects and reward item reveal card.",
+    "learningObjectives": [
+      "Create engaging gamification reward reveal animations",
+      "Handle async state transition from closed box to open reward",
+      "Render reward item details (badge, XP, quote, theme)"
+    ],
+    "buildChecklist": [
+      "Build RewardBox component with click-to-open interaction",
+      "Add CSS keyframe shake and glow effects prior to reveal",
+      "Trigger particle confetti explosion on reward reveal",
+      "Allow claim reward action to update global student profile state"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 28,
+    "title": "Missed-Day Alert Banner & Streak Freeze Recovery",
+    "description": "Build a prominent notification banner rendering when missedYesterday is true, offering one-click streak freeze recovery.",
+    "learningObjectives": [
+      "Handle critical edge case warning UI banners gracefully",
+      "Provide clear recovery call-to-action paths for users",
+      "Update streak state reactively upon freeze token usage"
+    ],
+    "buildChecklist": [
+      "Check student profile missedYesterday state on dashboard load",
+      "Render alert banner with warning icon and streak recovery button",
+      "Execute streak freeze recovery action via API",
+      "Hide alert banner and restore active streak counter"
+    ],
+    "difficulty": "Medium",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 29,
+    "title": "Empty State & New Student Onboarding Flow",
+    "description": "Design intentional empty states for brand-new students with zero completed days, missing profile details, and zero achievements.",
+    "learningObjectives": [
+      "Construct welcoming onboarding states without blank page crashes",
+      "Guide users to complete initial profile details (avatar, bio, track)",
+      "Provide clear 'Start Day 1 Challenge' call to action"
+    ],
+    "buildChecklist": [
+      "Test student-fresh persona returning zeroed state",
+      "Render empty heatmap placeholder graph with guidance text",
+      "Show profile completion progress callout widget",
+      "Verify zero JavaScript errors or unhandled null reference crashes"
+    ],
+    "difficulty": "Easy",
+    "track": "Fullstack Web"
+  },
+  {
+    "day": 30,
+    "title": "Midway Milestone Review & Fullstack Integration Test",
+    "description": "Perform end-to-end testing of the complete Day 1-30 fullstack application, verifying API routes, store consistency, and UI state.",
+    "learningObjectives": [
+      "Conduct thorough integration testing across service and API layers",
+      "Verify dataset state persistence across page reloads",
+      "Optimize initial page payload bundle size"
+    ],
+    "buildChecklist": [
+      "Run complete automated test suite covering all API endpoints",
+      "Verify 60-day challenge grid accurately reflects locked/unlocked states",
+      "Perform manual walkthrough submitting Day 30 challenge",
+      "Generate milestone report detailing test metrics"
+    ],
+    "difficulty": "Hard",
+    "track": "Fullstack Web"
+  },
+  { "day": 31, "title": "SQL Relational Modeling & Schema Normalization", "description": "Design normalized 3NF database schemas for challenge platforms including students, challenges, submissions, and achievements.", "learningObjectives": ["Understand primary keys, foreign keys, and referential integrity", "Apply 1NF, 2NF, and 3NF normalization rules", "Draft Entity-Relationship (ER) diagrams"], "buildChecklist": ["Create DDL migration scripts for tables", "Define foreign key CASCADE rules", "Verify zero data redundancy"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 32, "title": "SQL Joins, Aggregations & Window Functions", "description": "Write complex SQL queries for ranking leaderboard metrics using window functions (DENSE_RANK, ROW_NUMBER, PARTITION BY).", "learningObjectives": ["Master INNER, LEFT, and FULL OUTER joins", "Use aggregate functions with GROUP BY and HAVING clauses", "Utilize SQL window functions for competitive ranking"], "buildChecklist": ["Write query returning student rank partitioned by track", "Calculate rolling 7-day submission averages", "Benchmark query execution plan with EXPLAIN ANALYZE"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 33, "title": "Database Indexing & Performance Optimization", "description": "Optimize slow database queries using B-Tree indexes, composite indexes, and query execution plan analysis.", "learningObjectives": ["Understand index data structures and lookup overhead", "Identify sequential table scans in query plans", "Build compound indexes for multi-column sort queries"], "buildChecklist": ["Add index on student_id and submitted_at columns", "Reduce query execution time by 80%", "Verify index utilization via EXPLAIN"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 34, "title": "Object-Relational Mapping (ORM) with Prisma", "description": "Integrate Prisma ORM with Express, defining type-safe schema models and running database migrations.", "learningObjectives": ["Define Prisma schema models and relation fields", "Generate client types with prisma generate", "Execute automated database schema migrations"], "buildChecklist": ["Write schema.prisma for all domain entities", "Run prisma migrate dev", "Replace raw JSON queries with Prisma client calls"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 35, "title": "Authentication Architecture & Password Hashing", "description": "Implement secure user registration and password authentication using Argon2/bcrypt hashing and salt generation.", "learningObjectives": ["Understand cryptographic salt generation and slow hash functions", "Implement registration input validation and password strength checks", "Protect against timing attacks during password verification"], "buildChecklist": ["Hash user passwords before storage", "Reject weak passwords under 8 characters", "Verify password verification function speed (>100ms budget)"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 36, "title": "JSON Web Tokens (JWT) & Stateless Auth Middleware", "description": "Implement JWT access and refresh token authentication flows with HTTP-only cookies and auth header verification middleware.", "learningObjectives": ["Understand JWT structure (Header, Payload, Signature)", "Implement access token expiration and refresh token rotation", "Protect REST routes with authGuard middleware"], "buildChecklist": ["Generate signed JWT tokens on login success", "Store refresh tokens in HTTP-only, SameSite cookies", "Build req.user populating authGuard middleware"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 37, "title": "Role-Based Access Control (RBAC) Architecture", "description": "Enforce granular user role permissions (Student, Mentor, Admin, Recruiter) across API endpoints.", "learningObjectives": ["Design RBAC permission matrix", "Implement requireRole('admin') middleware", "Prevent unauthorized resource access"], "buildChecklist": ["Add role column to student schema", "Protect admin metrics endpoints with RBAC middleware", "Write tests attempting privilege escalation attacks"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 38, "title": "API Rate Limiting & Sliding Window Counter", "description": "Protect REST endpoints against brute force and DDoS attacks using Redis-backed sliding window rate limiters.", "learningObjectives": ["Understand token bucket and sliding window rate limiting algorithms", "Set up Redis client connection in Express", "Return standard 429 Too Many Requests response headers"], "buildChecklist": ["Limit submissions endpoint to max 5 requests per minute per IP", "Set Retry-After and X-RateLimit headers", "Test rate limit triggers with load testing script"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 39, "title": "Caching Layer with Redis", "description": "Cache expensive database queries and pre-computed leaderboards in Redis with automatic TTL invalidation.", "learningObjectives": ["Understand cache-aside pattern and cache stampede prevention", "Serialize/deserialize JSON payloads in Redis", "Invalidate caches reactively on submission writes"], "buildChecklist": ["Cache GET /api/leaderboard query for 60 seconds", "Implement cache invalidation on submission creation", "Verify 95% latency reduction on cached endpoint hits"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 40, "title": "Asynchronous Job Queues with BullMQ & Redis", "description": "Offload background tasks (email notifications, achievement evaluation, AI insight generation) to asynchronous BullMQ worker queues.", "learningObjectives": ["Understand producer-consumer messaging patterns", "Configure BullMQ queue connection and worker processes", "Handle job retry strategies and dead letter queues"], "buildChecklist": ["Create submission-processor background job queue", "Dispatch AI coach generation to worker process", "Verify API response latency remains fast under background workload"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 41, "title": "File Storage & S3 Direct Presigned Uploads", "description": "Implement direct-to-S3 avatar image uploads using AWS S3 presigned URLs and image MIME-type validation.", "learningObjectives": ["Understand presigned upload security architecture", "Avoid proxying binary files through application server process", "Validate image dimensions and file sizes"], "buildChecklist": ["Generate S3 presigned POST URLs for client upload", "Restrict upload file types to image/png and image/jpeg", "Update student avatarUrl after S3 upload completion"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 42, "title": "Real-Time WebSockets with Socket.io", "description": "Build real-time live notification broadcasts when candidates complete challenges or unlock top leaderboard ranks.", "learningObjectives": ["Understand WebSocket handshake and full-duplex protocol", "Implement socket event channels and room subscriptions", "Emit live activity feeds to connected dashboard clients"], "buildChecklist": ["Initialize Socket.io server on HTTP engine", "Emit 'globalSubmission' event on new challenge submit", "Render dynamic live activity ticker in frontend UI"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 43, "title": "GraphQL Schema & Resolver Architecture", "description": "Build a GraphQL API server alongside REST endpoints with flexible schema queries, mutations, and field resolvers.", "learningObjectives": ["Understand GraphQL types, queries, mutations, and schemas", "Implement field resolvers for nested data relationships", "Solve N+1 query problem using DataLoader"], "buildChecklist": ["Define GraphQL schema definition language (SDL)", "Write resolvers for student challenges and achievements", "Implement DataLoader batching for sub-queries"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 44, "title": "Server-Sent Events (SSE) for Real-Time AI Streaming", "description": "Stream AI Coach insight generation tokens in real-time to the browser using lightweight Server-Sent Events.", "learningObjectives": ["Understand SSE text/event-stream HTTP streaming protocol", "Maintain persistent HTTP response streams", "Handle client disconnect reconnections gracefully"], "buildChecklist": ["Build GET /api/student/:id/ai-coach/stream SSE endpoint", "Stream generated insight chunks token by token", "Close stream cleanly when completion finishes"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 45, "title": "Docker Containerization & Multi-Stage Builds", "description": "Containerize Node.js Express application using Docker multi-stage builds for minimal production image footprint.", "learningObjectives": ["Understand Docker container isolation and layer caching", "Write multi-stage Dockerfiles separating build dependencies from runtime", "Configure non-root container execution environment"], "buildChecklist": ["Create Dockerfile with node:20-alpine base image", "Ensure production image size is under 150MB", "Run containerized server with docker run -p 3001:3001"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 46, "title": "Docker Compose Multi-Container Setup", "description": "Orchestrate multi-container backend setup combining Express app, PostgreSQL database, and Redis cache via Docker Compose.", "learningObjectives": ["Define multi-container service dependencies in docker-compose.yml", "Configure container network bridges and volume mounts", "Use healthcheck commands for ordered service startup"], "buildChecklist": ["Create docker-compose.yml configuring app, postgres, and redis", "Verify environment variables pass correctly to container", "Spin up full system with single 'docker-compose up' command"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 47, "title": "Unit & Integration Testing with Supertest", "description": "Write comprehensive unit and integration tests covering REST endpoints, request parameters, and HTTP response codes.", "learningObjectives": ["Master test-driven development (TDD) principles", "Use Supertest to simulate HTTP requests without opening network ports", "Mock external dependencies cleanly"], "buildChecklist": ["Write tests for GET /api/student/:id", "Write tests for POST /api/challenges/:day/submit", "Achieve over 90% code coverage on core service functions"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 48, "title": "End-to-End (E2E) Testing with Playwright", "description": "Build automated Playwright E2E browser tests validating candidate submission flow, modal triggers, and streak updates.", "learningObjectives": ["Write resilient browser automation scripts", "Use locator APIs targeting ARIA attributes and test IDs", "Capture screenshots and video artifacts on test failure"], "buildChecklist": ["Automate complete Day 1 challenge submission flow", "Assert reward box modal appears with correct rewards", "Verify contribution heatmap updates visually"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 49, "title": "Continuous Integration (CI) with GitHub Actions", "description": "Configure automated GitHub Actions CI workflow running linters, static analysis, unit tests, and security scans on push.", "learningObjectives": ["Write YAML workflow definitions for GitHub Actions", "Cache node_modules dependencies between pipeline runs", "Set up test matrix for multiple Node.js versions"], "buildChecklist": ["Create .github/workflows/ci.yml workflow file", "Run npm lint, npm build, and npm test on pull requests", "Block PR merges if CI workflow steps fail"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 50, "title": "Application Security (OWASP Top 10) Hardening", "description": "Audit and harden backend server against OWASP Top 10 vulnerabilities (CORS, Helmet, Sanitization, CSRF, Parameter Pollution).", "learningObjectives": ["Implement security header enforcement with Helmet.js", "Sanitize incoming payloads against XSS attacks", "Configure restrictive CORS origin policies"], "buildChecklist": ["Mount helmet() security middleware on Express app", "Configure CORS whitelist for trusted origins", "Audit dependencies using npm audit"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 51, "title": "Structured Logging & Observability with Winston", "description": "Implement structured JSON logging with Winston and Morgan, including trace IDs, log levels (info, warn, error), and file transports.", "learningObjectives": ["Understand structured JSON logging for log aggregators (Datadog/ELK)", "Attach correlation trace IDs to request lifecycles", "Separate stdout debug logs from persistent error log files"], "buildChecklist": ["Configure Winston logger instance with JSON formatter", "Log all 4xx/5xx HTTP errors with request stack trace", "Implement morgan HTTP middleware logging stream"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 52, "title": "Prometheus Metrics & Healthcheck Endpoint", "description": "Expose Prometheus application metrics (HTTP request counts, latency histograms, memory usage) for monitoring dashboards.", "learningObjectives": ["Understand counter, gauge, and histogram metric types", "Expose /metrics endpoint formatted for Prometheus scraping", "Implement detailed liveness and readiness probe endpoints"], "buildChecklist": ["Install prom-client metric collector", "Track HTTP response duration buckets per route", "Verify /metrics output in Prometheus exposition format"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 53, "title": "Graceful Shutdown & Connection Draining", "description": "Implement graceful process shutdown logic handling SIGINT and SIGTERM signals, draining active HTTP connections cleanly.", "learningObjectives": ["Understand Node.js process signal events", "Stop accepting new network requests while waiting for pending handlers", "Close database connection pools and Redis sockets cleanly"], "buildChecklist": ["Add SIGTERM and SIGINT signal listeners", "Set 10-second timeout budget for graceful connection drain", "Verify zero dropped HTTP requests during process restart"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 54, "title": "Serverless Function Architecture with AWS Lambda", "description": "Adapt Express backend service handlers to run as serverless AWS Lambda functions behind API Gateway.", "learningObjectives": ["Understand serverless execution environment and cold start dynamics", "Use serverless-express wrapper for event payload translation", "Configure IAM execution roles and environment secrets"], "buildChecklist": ["Refactor handler export for AWS Lambda compatibility", "Package deployment zip artifact", "Test local invocation using Serverless Framework CLI"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 55, "title": "CDN Caching & Static Asset Edge Delivery", "description": "Configure CloudFront CDN edge caching rules, cache control headers, and invalidation triggers for static media assets.", "learningObjectives": ["Understand Edge locations and CDN caching behavior", "Configure Cache-Control headers (max-age, s-maxage, stale-while-revalidate)", "Programmatically trigger invalidation batch requests"], "buildChecklist": ["Set optimal Cache-Control headers on static asset routes", "Configure CORS headers for cross-domain asset requests", "Verify edge hit header (X-Cache: Hit from cloudfront)"], "difficulty": "Medium", "track": "Fullstack Web" },
+  { "day": 56, "title": "Infrastructure as Code (IaC) with Terraform", "description": "Provision AWS cloud infrastructure (VPC, ECS cluster, RDS instance, S3 bucket) declaratively using Terraform HCL scripts.", "learningObjectives": ["Master Terraform state management and HCL syntax", "Define reusable cloud infrastructure modules", "Plan and execute terraform apply deployments"], "buildChecklist": ["Write main.tf defining AWS cloud resources", "Run terraform plan verifying change set output", "Ensure zero hardcoded cloud secrets in configuration"], "difficulty": "Expert", "track": "Fullstack Web" },
+  { "day": 57, "title": "Blue-Green & Canary Deployment Pipeline", "description": "Design zero-downtime blue-green deployment scripts switching traffic seamlessly between application server instances.", "learningObjectives": ["Understand zero-downtime deployment strategies", "Implement automated healthcheck verification before traffic shift", "Configure quick rollback scripts upon healthcheck failure"], "buildChecklist": ["Create automated deployment script shifting traffic targets", "Verify healthcheck status of new green instance prior to switch", "Execute instant rollback test simulating failed deployment"], "difficulty": "Expert", "track": "Fullstack Web" },
+  { "day": 58, "title": "Distributed Tracing with OpenTelemetry", "description": "Instrument application microservices with OpenTelemetry distributed tracing, exporting span traces to Jaeger visualization UI.", "learningObjectives": ["Understand trace contexts, trace IDs, and span hierarchies", "Instrument HTTP requests across service boundaries", "Visualize latency bottlenecks in Jaeger UI"], "buildChecklist": ["Initialize OpenTelemetry SDK with auto-instrumentation", "Export spans via OTLP gRPC exporter", "Verify end-to-end trace correlation in Jaeger web console"], "difficulty": "Expert", "track": "Fullstack Web" },
+  { "day": 59, "title": "Disaster Recovery & Automated Database Backups", "description": "Build automated database snapshot backup pipelines with point-in-time recovery testing and encrypted S3 archival.", "learningObjectives": ["Understand RPO (Recovery Point Objective) and RTO (Recovery Time Objective)", "Automate encrypted database dump scripts", "Perform routine backup restore verification tests"], "buildChecklist": ["Create cron job taking daily encrypted database backups", "Store backups in S3 with Glacier lifecycle transition rule", "Execute full restore test verifying data integrity"], "difficulty": "Hard", "track": "Fullstack Web" },
+  { "day": 60, "title": "Capstone: 60-Day Fullstack Challenge Platform Launch", "description": "Final capstone launch: deploy fully hardened, scalable, microservice-backed ABTalks coding platform to production with full observability.", "learningObjectives": ["Synthesize 60 days of fullstack web engineering concepts", "Verify load scalability under high concurrent candidate traffic", "Celebrate legendary completion of the 60-Day Coding Challenge!"], "buildChecklist": ["Pass final end-to-end smoke test suite on production cluster", "Verify 100% operational uptime on monitoring dashboards", "Unlock Legend status level and special capstone completion badge"], "difficulty": "Expert", "track": "Fullstack Web" }
+]

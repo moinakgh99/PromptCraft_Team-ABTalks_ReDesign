@@ -1,0 +1,58 @@
+[
+  {
+    "id": "reward-xp-50",
+    "type": "xpBonus",
+    "title": "XP Boost (+50 XP)",
+    "description": "Bonus XP credited to your overall total!",
+    "value": 50,
+    "weight": 40
+  },
+  {
+    "id": "reward-xp-100",
+    "type": "xpBonus",
+    "title": "Super XP Boost (+100 XP)",
+    "description": "Double bonus XP boost for your dedication!",
+    "value": 100,
+    "weight": 20
+  },
+  {
+    "id": "reward-streak-freeze",
+    "type": "streakFreeze",
+    "title": "Streak Freeze Token",
+    "description": "Grants 1 Streak Freeze token to protect against missed days!",
+    "value": 1,
+    "weight": 15
+  },
+  {
+    "id": "reward-theme-synthwave",
+    "type": "themeUnlock",
+    "title": "Synthwave Theme Unlock",
+    "description": "Unlocks the retro neon Synthwave UI theme!",
+    "value": "synthwave",
+    "weight": 10
+  },
+  {
+    "id": "reward-badge-daily",
+    "type": "badge",
+    "title": "Daily Champion Badge",
+    "description": "Special badge unlocked for outstanding consistency!",
+    "value": "Daily Champion",
+    "weight": 8
+  },
+  {
+    "id": "reward-quote-dev",
+    "type": "quote",
+    "title": "Developer Inspiration Quote",
+    "description": "\"First, solve the problem. Then, write the code.\" — John Johnson",
+    "value": "First, solve the problem. Then, write the code.",
+    "weight": 5
+  },
+  {
+    "id": "reward-surprise-combo",
+    "type": "surprise",
+    "title": "Legendary Surprise Combo",
+    "description": "Grand prize: +150 XP Boost and Dracula Theme!",
+    "value": 150,
+    "weight": 2
+  }
+]
