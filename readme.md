@@ -35,20 +35,45 @@ This redesign focuses on a polished, mobile-first experience at a **390px viewpo
 
 ## Screenshots
 
-The three required routes are designed for a 390px mobile viewport.
+The ABTalks redesign is built mobile-first around a 390px viewport, with focused experiences for students, recruiters, and administrators.
 
-| Landing | Dashboard | Challenge Day |
-|---|---|---|
-| ![Landing page](docs/screenshots/landing.png) | ![Dashboard](docs/screenshots/dashboard.png) | ![Challenge Day](docs/screenshots/day-12.png) |
+### 🏠 Landing Page
 
-### Capturing Screenshots
+The landing experience introduces the 60-day challenge, explains how it works, highlights available tracks, and guides students toward starting their journey.
 
-1. Run the app locally or open the live demo.
-2. Open Chrome DevTools and enable the device toolbar.
-3. Use a **390 × 844** viewport.
-4. Log in with `student-far` or another seeded student.
-5. Capture `/`, `/dashboard`, and `/day/12`.
-6. Save the images as `docs/screenshots/landing.png`, `dashboard.png`, and `day-12.png`.
+![Landing](docs/screenshots/landing1.png)
+![Landing](docs/screenshots/landing2.png)
+![Landing](docs/screenshots/landing3.png)
+![Landing](docs/screenshots/landing4.png)
+
+### 📊 Student Dashboard
+
+![ABTalks Student Dashboard](docs/screenshots/dashboard1.png)
+![ABTalks Student Dashboard](docs/screenshots/dashboard2.png)
+
+### 🚀 Challenge Day
+
+![ABTalks Challenge Day](docs/screenshots/challenge1.png)
+![ABTalks Challenge Day](docs/screenshots/challenge2.png)
+
+---
+
+## Beyond the Core Requirements
+
+In addition to the required student-facing experience, we also implemented several out-of-scope features to extend the platform beyond the core hackathon brief.
+
+### Bonus Experiences
+
+- **Recruiter Dashboard** — discover and filter students, review consistency, recruiter visibility, achievements, and proof-of-work activity.
+- **Admin Dashboard** — monitor challenge performance, students, submissions, at-risk users, content health, and gamification settings.
+- **XP & Level System** — progression from Explorer → Builder → Creator → Architect → Legend.
+- **Build Heatmap** — GitHub-style visualization of 60-day challenge progress.
+- **AI Momentum Coach** — personalized progress insights based on mock student activity.
+- **Daily Loot & Rewards** — randomized badges, themes, quotes, and other rewards.
+- **Personal Dashboard Themes** — Dark, Cyber, Glass, Neon, and Minimal.
+- **Leaderboard & Community Spotlight** — competitive and community-driven discovery features.
+
+These features were implemented as additional product depth beyond the three required student routes and are available to explore in the live application.
 
 ---
 
