@@ -42,18 +42,23 @@ The ABTalks redesign is built mobile-first around a 390px viewport, with focused
 The landing experience introduces the 60-day challenge, explains how it works, highlights available tracks, and guides students toward starting their journey.
 
 ![Landing](docs/screenshots/landing1.png)
+<br>
 ![Landing](docs/screenshots/landing2.png)
+<br>
 ![Landing](docs/screenshots/landing3.png)
+<br>
 ![Landing](docs/screenshots/landing4.png)
 
 ### 📊 Student Dashboard
 
 ![ABTalks Student Dashboard](docs/screenshots/dashboard1.png)
+<br>
 ![ABTalks Student Dashboard](docs/screenshots/dashboard2.png)
 
 ### 🚀 Challenge Day
 
 ![ABTalks Challenge Day](docs/screenshots/challenge1.png)
+<br>
 ![ABTalks Challenge Day](docs/screenshots/challenge2.png)
 
 ---
